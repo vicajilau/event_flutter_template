@@ -9,7 +9,7 @@
             "cwd": "code",
             "request": "launch",
             "type": "dart",
-            "program": "code/lib/main.dart",
+            "program": "lib/main.dart",
         }
     ]
 }

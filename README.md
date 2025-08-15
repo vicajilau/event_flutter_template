@@ -12,6 +12,7 @@ Designed to work without a backend, using a simple **year-based folder structure
 
 ### Perfect for
 - Tech conferences
+- DevFests
 - Meetups
 - Festivals
 - Hackathons

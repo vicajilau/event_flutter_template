@@ -6,10 +6,10 @@
     "description": "Bienvenida al DevFest 2025"
   },
   {
-    "title": "Flutter para Web: Mejores prácticas",
+    "title": "Google Summer of Code y Becas Google: Tu puerta de entrada al mundo tech",
     "time": "09:30 - 10:15",
-    "speaker": "Speaker 1",
-    "description": "Cómo crear aplicaciones web robustas con Flutter"
+    "speaker": "Andreu Ibàñez Perales",
+    "description": "Descubre las oportunidades que ofrece Google Summer of Code, becas de investigación y programas de financiación. Experiencias desde el Parque Científico de Lleida y consejos para aplicar con éxito."
   },
   {
     "title": "Coffee Break",
@@ -18,9 +18,33 @@
     "description": "Networking y café"
   },
   {
-    "title": "Firebase y Flutter: Una combinación perfecta",
+    "title": "Flutter para Web: Mejores prácticas",
     "time": "10:45 - 11:30",
-    "speaker": "Speaker 2",
+    "speaker": "Alfredo Bautista Santos",
+    "description": "Cómo crear aplicaciones web robustas con Flutter"
+  },
+  {
+    "title": "Firebase y Flutter: Una combinación perfecta",
+    "time": "11:30 - 12:15",
+    "speaker": "Victor Carreras",
     "description": "Integración completa de Firebase en aplicaciones Flutter"
+  },
+  {
+    "title": "Lunch Break",
+    "time": "12:15 - 13:30",
+    "speaker": "",
+    "description": "Comida y networking"
+  },
+  {
+    "title": "Open Gateway: Democratizando las APIs de Telecomunicaciones",
+    "time": "13:30 - 14:15",
+    "speaker": "Irene Ruiz Pozo",
+    "description": "Descubre cómo Open Gateway de Telefónica está revolucionando el acceso a APIs de telecomunicaciones para developers. Una visión desde DevRel sobre oportunidades y casos de uso."
+  },
+  {
+    "title": "Machine Learning en Flutter: De la teoría a la práctica",
+    "time": "14:15 - 15:00",
+    "speaker": "Moises Martínez",
+    "description": "Implementando modelos de ML e IA en aplicaciones Flutter. Casos prácticos, TensorFlow Lite y mejores prácticas desde la perspectiva académica y empresarial."
   }
 ]

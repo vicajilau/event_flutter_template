@@ -48,10 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      body: IndexedStack(
-        index: _selectedIndex,
-        children: _screens,
-      ),
+      body: IndexedStack(index: _selectedIndex, children: _screens),
       bottomNavigationBar: NavigationBar(
         selectedIndex: _selectedIndex,
         onDestinationSelected: _onItemTapped,
@@ -87,7 +84,9 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             Text('Año: ${widget.config.year}'),
             const SizedBox(height: 8),
-            const Text('¡Bienvenido al evento tecnológico más importante del año!'),
+            const Text(
+              '¡Bienvenido al evento tecnológico más importante del año!',
+            ),
           ],
         ),
         actions: [

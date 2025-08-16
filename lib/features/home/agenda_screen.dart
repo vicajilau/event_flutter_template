@@ -35,7 +35,10 @@ class AgendaScreen extends StatelessWidget {
                   onPressed: () {
                     Navigator.of(context).pop();
                     Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => AgendaScreen(dataLoader: dataLoader)),
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            AgendaScreen(dataLoader: dataLoader),
+                      ),
                     );
                   },
                   child: const Text('Reintentar'),
@@ -45,7 +48,7 @@ class AgendaScreen extends StatelessWidget {
           );
         }
         final agenda = snapshot.data ?? [];
-        
+
         if (agenda.isEmpty) {
           return const Center(
             child: Column(
@@ -58,7 +61,7 @@ class AgendaScreen extends StatelessWidget {
             ),
           );
         }
-        
+
         return ListView.builder(
           padding: const EdgeInsets.all(16),
           itemCount: agenda.length,
@@ -73,15 +76,22 @@ class AgendaScreen extends StatelessWidget {
                     Row(
                       children: [
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 6,
+                          ),
                           decoration: BoxDecoration(
-                            color: Theme.of(context).colorScheme.primaryContainer,
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.primaryContainer,
                             borderRadius: BorderRadius.circular(16),
                           ),
                           child: Text(
                             item['time'] ?? '',
                             style: TextStyle(
-                              color: Theme.of(context).colorScheme.onPrimaryContainer,
+                              color: Theme.of(
+                                context,
+                              ).colorScheme.onPrimaryContainer,
                               fontWeight: FontWeight.bold,
                               fontSize: 12,
                             ),
@@ -96,7 +106,8 @@ class AgendaScreen extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    if (item['speaker'] != null && item['speaker'].toString().isNotEmpty) ...[
+                    if (item['speaker'] != null &&
+                        item['speaker'].toString().isNotEmpty) ...[
                       const SizedBox(height: 8),
                       Row(
                         children: [
@@ -108,15 +119,17 @@ class AgendaScreen extends StatelessWidget {
                           const SizedBox(width: 4),
                           Text(
                             item['speaker'],
-                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              color: Theme.of(context).colorScheme.primary,
-                              fontWeight: FontWeight.w500,
-                            ),
+                            style: Theme.of(context).textTheme.bodyMedium
+                                ?.copyWith(
+                                  color: Theme.of(context).colorScheme.primary,
+                                  fontWeight: FontWeight.w500,
+                                ),
                           ),
                         ],
                       ),
                     ],
-                    if (item['description'] != null && item['description'].toString().isNotEmpty) ...[
+                    if (item['description'] != null &&
+                        item['description'].toString().isNotEmpty) ...[
                       const SizedBox(height: 8),
                       Text(
                         item['description'],

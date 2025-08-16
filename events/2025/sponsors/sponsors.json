@@ -2,19 +2,73 @@
   {
     "name": "Google",
     "type": "Patrocinador Principal",
-    "logo": "https://via.placeholder.com/200x100",
+    "logo": "https://logo.clearbit.com/google.com",
     "website": "https://google.com"
+  },
+  {
+    "name": "Microsoft",
+    "type": "Patrocinador Principal",
+    "logo": "https://logo.clearbit.com/microsoft.com",
+    "website": "https://microsoft.com"
   },
   {
     "name": "Firebase",
     "type": "Patrocinador Gold",
-    "logo": "https://via.placeholder.com/200x100",
+    "logo": "https://cdn.worldvectorlogo.com/logos/firebase-1.svg",
     "website": "https://firebase.google.com"
   },
   {
     "name": "Flutter",
-    "type": "Patrocinador Silver",
-    "logo": "https://via.placeholder.com/200x100",
+    "type": "Patrocinador Gold",
+    "logo": "https://cdn.worldvectorlogo.com/logos/flutter-logo.svg",
     "website": "https://flutter.dev"
+  },
+  {
+    "name": "GitHub",
+    "type": "Patrocinador Gold",
+    "logo": "https://logo.clearbit.com/github.com",
+    "website": "https://github.com"
+  },
+  {
+    "name": "JetBrains",
+    "type": "Patrocinador Silver",
+    "logo": "https://logo.clearbit.com/jetbrains.com",
+    "website": "https://jetbrains.com"
+  },
+  {
+    "name": "Spotify",
+    "type": "Patrocinador Silver",
+    "logo": "https://logo.clearbit.com/spotify.com",
+    "website": "https://spotify.com"
+  },
+  {
+    "name": "Adobe",
+    "type": "Patrocinador Silver",
+    "logo": "https://logo.clearbit.com/adobe.com",
+    "website": "https://adobe.com"
+  },
+  {
+    "name": "Atlassian",
+    "type": "Patrocinador Bronze",
+    "logo": "https://logo.clearbit.com/atlassian.com",
+    "website": "https://atlassian.com"
+  },
+  {
+    "name": "Figma",
+    "type": "Patrocinador Bronze",
+    "logo": "https://logo.clearbit.com/figma.com",
+    "website": "https://figma.com"
+  },
+  {
+    "name": "Vercel",
+    "type": "Patrocinador Bronze",
+    "logo": "https://logo.clearbit.com/vercel.com",
+    "website": "https://vercel.com"
+  },
+  {
+    "name": "Stripe",
+    "type": "Patrocinador Bronze",
+    "logo": "https://logo.clearbit.com/stripe.com",
+    "website": "https://stripe.com"
   }
 ]

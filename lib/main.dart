@@ -5,7 +5,7 @@ import 'features/home/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   final config = await ConfigLoader.loadConfig();
   final dataLoader = DataLoader(config);
 
@@ -20,9 +20,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final primaryColor = Color(int.parse(config.primaryColor.replaceFirst('#', '0xff')));
-    final secondaryColor = Color(int.parse(config.secondaryColor.replaceFirst('#', '0xff')));
-    
+    final primaryColor = Color(
+      int.parse(config.primaryColor.replaceFirst('#', '0xff')),
+    );
+    final secondaryColor = Color(
+      int.parse(config.secondaryColor.replaceFirst('#', '0xff')),
+    );
+
     return MaterialApp(
       title: config.eventName,
       debugShowCheckedModeBanner: false,
@@ -47,13 +51,17 @@ class MyApp extends StatelessWidget {
         cardTheme: const CardThemeData(
           elevation: 4,
           margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(12))),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(12)),
+          ),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             backgroundColor: primaryColor,
             foregroundColor: Colors.white,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           ),
         ),

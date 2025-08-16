@@ -35,7 +35,7 @@ class SponsorsScreen extends StatelessWidget {
           );
         }
         final sponsors = snapshot.data ?? [];
-        
+
         if (sponsors.isEmpty) {
           return const Center(
             child: Column(
@@ -48,20 +48,20 @@ class SponsorsScreen extends StatelessWidget {
             ),
           );
         }
-        
+
         // Agrupar sponsors por tipo
         final Map<String, List<dynamic>> groupedSponsors = {};
         for (final sponsor in sponsors) {
           final type = sponsor['type'] ?? 'Otros';
           groupedSponsors.putIfAbsent(type, () => []).add(sponsor);
         }
-        
+
         return ListView(
           padding: const EdgeInsets.all(16),
           children: groupedSponsors.entries.map((entry) {
             final type = entry.key;
             final sponsorList = entry.value;
-            
+
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -89,7 +89,7 @@ class SponsorsScreen extends StatelessWidget {
                     final sponsor = sponsorList[index];
                     return Card(
                       child: InkWell(
-                        onTap: sponsor['website'] != null 
+                        onTap: sponsor['website'] != null
                             ? () => _launchURL(sponsor['website'])
                             : null,
                         borderRadius: BorderRadius.circular(12),
@@ -105,31 +105,40 @@ class SponsorsScreen extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(8),
                                     color: Colors.white,
                                     border: Border.all(
-                                      color: Theme.of(context).colorScheme.outline.withOpacity(0.2),
+                                      color: Theme.of(
+                                        context,
+                                      ).colorScheme.outline.withValues(alpha: 0.2),
                                     ),
                                   ),
                                   child: sponsor['logo'] != null
                                       ? ClipRRect(
-                                          borderRadius: BorderRadius.circular(8),
+                                          borderRadius: BorderRadius.circular(
+                                            8,
+                                          ),
                                           child: Image.network(
                                             sponsor['logo'],
                                             fit: BoxFit.contain,
-                                            errorBuilder: (context, error, stackTrace) {
-                                              return Center(
-                                                child: Icon(
-                                                  Icons.business,
-                                                  size: 32,
-                                                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                                                ),
-                                              );
-                                            },
+                                            errorBuilder:
+                                                (context, error, stackTrace) {
+                                                  return Center(
+                                                    child: Icon(
+                                                      Icons.business,
+                                                      size: 32,
+                                                      color: Theme.of(context)
+                                                          .colorScheme
+                                                          .onSurfaceVariant,
+                                                    ),
+                                                  );
+                                                },
                                           ),
                                         )
                                       : Center(
                                           child: Icon(
                                             Icons.business,
                                             size: 32,
-                                            color: Theme.of(context).colorScheme.onSurfaceVariant,
+                                            color: Theme.of(
+                                              context,
+                                            ).colorScheme.onSurfaceVariant,
                                           ),
                                         ),
                                 ),
@@ -137,9 +146,8 @@ class SponsorsScreen extends StatelessWidget {
                               const SizedBox(height: 8),
                               Text(
                                 sponsor['name'] ?? '',
-                                style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                style: Theme.of(context).textTheme.titleSmall
+                                    ?.copyWith(fontWeight: FontWeight.bold),
                                 textAlign: TextAlign.center,
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
@@ -159,7 +167,7 @@ class SponsorsScreen extends StatelessWidget {
       },
     );
   }
-  
+
   void _launchURL(String url) {
     // En una implementación real, usarías url_launcher
     print('Abriendo URL: $url');

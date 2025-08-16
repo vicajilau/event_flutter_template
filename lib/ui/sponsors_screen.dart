@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import '../core/core.dart';
+import '../l10n/app_localizations.dart';
 
+/// Screen that displays event sponsors in a responsive grid layout
+/// Fetches sponsor data and displays logos with clickable links
 class SponsorsScreen extends StatelessWidget {
+  /// Data loader for fetching sponsor information
   final DataLoader dataLoader;
+  
   const SponsorsScreen({super.key, required this.dataLoader});
 
   @override
@@ -11,13 +16,13 @@ class SponsorsScreen extends StatelessWidget {
       future: dataLoader.loadSponsors(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(
+          return Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CircularProgressIndicator(),
-                SizedBox(height: 16),
-                Text('Cargando patrocinadores...'),
+                const CircularProgressIndicator(),
+                const SizedBox(height: 16),
+                Text(AppLocalizations.of(context)!.loadingSponsors),
               ],
             ),
           );
@@ -27,9 +32,9 @@ class SponsorsScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.error_outline, size: 64, color: Colors.red),
-                SizedBox(height: 16),
-                Text('Error cargando patrocinadores'),
+                const Icon(Icons.error_outline, size: 64, color: Colors.red),
+                const SizedBox(height: 16),
+                Text(AppLocalizations.of(context)!.errorLoadingSponsors),
               ],
             ),
           );
@@ -37,13 +42,13 @@ class SponsorsScreen extends StatelessWidget {
         final sponsors = snapshot.data ?? [];
 
         if (sponsors.isEmpty) {
-          return const Center(
+          return Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.business_outlined, size: 64, color: Colors.grey),
-                SizedBox(height: 16),
-                Text('No hay patrocinadores registrados'),
+                const Icon(Icons.business_outlined, size: 64, color: Colors.grey),
+                const SizedBox(height: 16),
+                Text(AppLocalizations.of(context)!.noSponsorsRegistered),
               ],
             ),
           );

@@ -1,6 +1,6 @@
-<p align="center">
-  <img src=".github/assets/event-logo.png" alt="Event Flutter Template logo" width="128" height="128">
-</p>
+<h1 align="center">
+  Event Flutter Template
+</h1>
 
 <p align="center">
   <img src="https://github.com/vicajilau/event_flutter_template/actions/workflows/flutter_workflow.yml/badge.svg" alt="CI Status">
@@ -172,7 +172,7 @@ class Track {
 The template supports three environments:
 
 | Environment | Data Source      | Use Case                  |
-| ----------- | ---------------- | ------------------------- |
+|-------------|------------------|---------------------------|
 | **dev**     | Local files      | Development and testing   |
 | **pre**     | GitHub raw files | Pre-production validation |
 | **pro**     | GitHub Pages     | Production deployment     |

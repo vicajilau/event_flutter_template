@@ -26,7 +26,8 @@ _The template provides a professional interface for event information with respo
 - **Professional UI/UX**: Modern Material 3 Design with smooth animations and responsive layouts
 - **Multi-environment support**: Development, pre-production, and production configurations
 - **GitHub Pages deployment**: Deploy in minutes with automated CI/CD workflows
-- **Offline support**: Event information accessible without internet connection
+- **Mobile support**: Flutter apps support Web and mobile applications
+- **Location services**: Integrated venue location with coordinates, maps integration, and navigation support for attendees
 - **Social media integration**: Built-in social icons and sharing capabilities
 
 ### 🌍 Internationalization
@@ -40,10 +41,11 @@ For detailed internationalization information, see: **[Internationalization Docu
 
 ### 📅 Event Management
 
-- **Multi-day Agenda**: Support for complex event schedules with multiple tracks and sessions
+- **Multi-day Agenda**: Support for complex event schedules with multiple days, tracks and/or sessions
 - **Speaker Profiles**: Comprehensive speaker information with photos and social links
 - **Sponsor Management**: Multi-tier sponsor display with logos and descriptions
 - **Venue Information**: Complete venue details with location and accessibility information
+- **Location Integration**: Users can access venue location with integrated map support and navigation features
 - **Session Types**: Support for keynotes, talks, workshops, networking sessions, and more
 - **Real-time Updates**: Content updates through GitHub without app redeployment
 
@@ -242,63 +244,26 @@ For detailed testing information, see: **[Testing Documentation](TESTING.md)**
 
 ### Customization
 
-#### Event Configuration
+The template is fully customizable through JSON configuration files. You can easily modify:
 
-1. **Update site configuration** (`2025/config/site.json`):
+- **Event information**: Name, dates, venue, description
+- **Visual theme**: Primary and secondary colors
+- **Speakers**: Profiles, bios, social media links
+- **Agenda**: Multi-day schedules with tracks and sessions
+- **Sponsors**: Different sponsor tiers with logos
 
-   ```json
-   {
-     "eventName": "Your Event Name",
-     "dates": {
-       "start": "2025-09-15",
-       "end": "2025-09-17"
-     },
-     "venue": {
-       "name": "Your Venue",
-       "address": "Venue Address"
-     }
-   }
-   ```
+For complete configuration instructions including JSON structure, examples, and best practices, see: **[Configuration Guide](CONFIGURATION.md)**
 
-2. **Add speakers** (`2025/speakers/speakers.json`):
+#### Quick Start
 
-   ```json
-   [
-     {
-       "name": "Speaker Name",
-       "title": "Speaker Title",
-       "company": "Company",
-       "bio": "Speaker biography",
-       "photo": "images/speaker.jpg"
-     }
-   ]
-   ```
-
-3. **Configure agenda** (`2025/config/agenda.json`):
-   ```json
-   [
-     {
-       "date": "2025-09-15",
-       "tracks": [
-         {
-           "name": "Main Track",
-           "sessions": [
-             {
-               "time": "09:00",
-               "title": "Session Title",
-               "speaker": "Speaker Name",
-               "type": "keynote"
-             }
-           ]
-         }
-       ]
-     }
-   ]
-   ```
+1. **Edit event basic info** in `events/2025/config/site.json`
+2. **Add your speakers** in `events/2025/speakers/speakers.json`
+3. **Configure agenda** in `events/2025/config/agenda.json`
+4. **Add sponsors** in `events/2025/sponsors/sponsors.json`
 
 #### Visual Customization
 
-- **Colors**: Modify theme in `lib/main.dart`
+- **Colors**: Update `primaryColor` and `secondaryColor` in site.json
 - **Logo**: Replace logo files in assets
 - **Icons**: Update social media icons in `lib/ui/widgets/`
 
@@ -384,6 +349,7 @@ To add new event features:
 ### Core Documentation
 
 - **[Main README](README.md)**: This file - comprehensive overview and setup guide
+- **[Configuration Guide](CONFIGURATION.md)**: Complete guide to event configuration, JSON structure, and customization options
 - **[Internationalization Documentation](INTERNATIONALIZATION.md)**: Complete guide to multi-language support and localization system
 - **[Testing Documentation](TESTING.md)**: Detailed testing guide with coverage information and best practices
 - **[License](LICENSE)**: MIT License details and terms

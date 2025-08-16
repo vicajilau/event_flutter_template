@@ -118,7 +118,7 @@ class AgendaScreen extends StatelessWidget {
         ),
 
         // Tracks del día
-        ...day.tracks.map((track) => _buildTrackView(context, track)).toList(),
+        ...day.tracks.map((track) => _buildTrackView(context, track)),
       ],
     );
   }
@@ -157,9 +157,7 @@ class AgendaScreen extends StatelessWidget {
           ),
 
         // Sesiones del track
-        ...track.sessions
-            .map((session) => _buildSessionCard(context, session))
-            .toList(),
+        ...track.sessions.map((session) => _buildSessionCard(context, session)),
         const SizedBox(height: 16),
       ],
     );
@@ -201,7 +199,9 @@ class AgendaScreen extends StatelessWidget {
                       vertical: 4,
                     ),
                     decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.surfaceVariant,
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.surfaceContainerHighest,
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Text(
@@ -268,7 +268,7 @@ class AgendaScreen extends StatelessWidget {
       case 'break':
         return Colors.orange.shade100;
       default:
-        return Theme.of(context).colorScheme.surfaceVariant;
+        return Theme.of(context).colorScheme.surfaceContainerHighest;
     }
   }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../core/data_loader.dart';
 
@@ -131,7 +132,7 @@ class SpeakersScreen extends StatelessWidget {
                                     );
                                   },
                                   errorBuilder: (context, error, stackTrace) {
-                                    print(
+                                    debugPrint(
                                       'Error loading image for ${speaker['name']}: $error',
                                     );
                                     return Center(
@@ -208,42 +209,55 @@ class SpeakersScreen extends StatelessWidget {
 
     final List<Widget> socialIcons = [];
 
+    // Twitter/X usando SVG
     if (social['twitter'] != null) {
       socialIcons.add(
-        _socialIcon(
+        _socialIconSvg(
           context,
-          Icons.alternate_email,
+          'assets/X_icon.svg',
           social['twitter'],
-          Colors.blue,
+          const Color(0xFF1DA1F2),
+          'Twitter/X',
         ),
       );
     }
 
+    // LinkedIn usando SVG
     if (social['linkedin'] != null) {
       socialIcons.add(
-        _socialIcon(
+        _socialIconSvg(
           context,
-          Icons.business,
+          'assets/LinkedIn_icon.svg',
           social['linkedin'],
-          Colors.blue.shade700,
+          const Color(0xFF0077B5),
+          'LinkedIn',
         ),
       );
     }
 
+    // GitHub usando icono material (no hay SVG disponible)
     if (social['github'] != null) {
       socialIcons.add(
-        _socialIcon(
+        _socialIconSvg(
           context,
-          Icons.code,
+          'assets/GitHub_icon.svg',
           social['github'],
-          Colors.grey.shade800,
+          const Color(0xFF333333),
+          'GitHub',
         ),
       );
     }
 
+    // Website usando icono material
     if (social['website'] != null) {
       socialIcons.add(
-        _socialIcon(context, Icons.public, social['website'], Colors.green),
+        _socialIconSvg(
+          context,
+          'assets/Website_icon.svg',
+          social['website'],
+          const Color(0xFF4CAF50),
+          'Website',
+        ),
       );
     }
 
@@ -262,23 +276,32 @@ class SpeakersScreen extends StatelessWidget {
     );
   }
 
-  Widget _socialIcon(
+  Widget _socialIconSvg(
     BuildContext context,
-    IconData icon,
+    String svgPath,
     String url,
     Color color,
+    String tooltip,
   ) {
-    return InkWell(
-      onTap: () => _launchURL(url),
-      borderRadius: BorderRadius.circular(16),
-      child: Container(
-        padding: const EdgeInsets.all(6),
-        decoration: BoxDecoration(
-          color: color.withOpacity(0.1),
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: color.withOpacity(0.3)),
+    return Tooltip(
+      message: tooltip,
+      child: InkWell(
+        onTap: () => _launchURL(url),
+        borderRadius: BorderRadius.circular(20),
+        child: Container(
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: color.withValues(alpha: 0.1),
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(color: color.withValues(alpha: 0.3)),
+          ),
+          child: SvgPicture.asset(
+            svgPath,
+            width: 18,
+            height: 18,
+            colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
+          ),
         ),
-        child: Icon(icon, size: 16, color: color),
       ),
     );
   }

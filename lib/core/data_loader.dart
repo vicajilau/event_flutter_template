@@ -14,8 +14,9 @@ class DataLoader {
       // Carga remota
       final url = '${config.baseUrl}/$path';
       final res = await http.get(Uri.parse(url));
-      if (res.statusCode != 200)
+      if (res.statusCode != 200) {
         throw Exception("Error cargando datos desde $url");
+      }
       content = res.body;
     } else {
       // Carga local
@@ -35,8 +36,9 @@ class DataLoader {
       // Carga remota
       final url = '${config.baseUrl}/config/agenda.json';
       final res = await http.get(Uri.parse(url));
-      if (res.statusCode != 200)
+      if (res.statusCode != 200) {
         throw Exception("Error cargando agenda desde $url");
+      }
       content = res.body;
     } else {
       // Carga local

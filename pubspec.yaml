@@ -1,8 +1,8 @@
 name: event_flutter_template
-description: "A new Flutter project."
+description: "A Flutter template for creating web applications and mobile apps for tech events like DevFests, conferences, and meetups. Features GitHub-powered backend, customizable themes, and multi-environment support."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -52,7 +52,6 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -64,8 +63,6 @@ flutter:
     - events/2025/speakers/
     - events/2025/sponsors/
     - events/2025/assets/
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

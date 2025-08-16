@@ -6,7 +6,6 @@
     "configurations": [
         {
             "name": "Tech Conference (dev)",
-            "cwd": "code",
             "request": "launch",
             "type": "dart",
             "program": "lib/main.dart",
@@ -14,7 +13,6 @@
         },
         {
             "name": "Tech Conference (pre)",
-            "cwd": "code",
             "request": "launch",
             "type": "dart",
             "program": "lib/main.dart",
@@ -25,7 +23,6 @@
         },
         {
             "name": "Tech Conference (pro)",
-            "cwd": "code",
             "request": "launch",
             "type": "dart",
             "program": "lib/main.dart",

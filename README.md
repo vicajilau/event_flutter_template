@@ -8,8 +8,6 @@
   <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT">
 </p>
 
-# Event Flutter Template
-
 A fully customizable Flutter template for creating professional event websites and apps, deployable on **GitHub Pages** or any static hosting platform. Designed to work without a backend, using a simple **year-based folder structure** and JSON files for content management.
 
 ![Event Template Demo](.github/assets/demo.png)

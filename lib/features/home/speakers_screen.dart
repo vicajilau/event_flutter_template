@@ -214,11 +214,11 @@ class SpeakersScreen extends StatelessWidget {
       socialIcons.add(
         _socialIconSvg(
           context,
-          'assets/X_icon.svg',
-          social['twitter'],
-          const Color(0xFF1DA1F2),
-          true,
-          'Twitter/X',
+          svgPath: 'assets/X_icon.svg',
+          url: social['twitter'],
+          color: const Color(0xFF1DA1F2),
+          tooltip: 'Twitter/X',
+          tint: true,
         ),
       );
     }
@@ -228,39 +228,38 @@ class SpeakersScreen extends StatelessWidget {
       socialIcons.add(
         _socialIconSvg(
           context,
-          'assets/LinkedIn_icon.svg',
-          social['linkedin'],
-          const Color(0xFF0077B5),
-          false,
-          'LinkedIn',
+          svgPath: 'assets/LinkedIn_icon.svg',
+          url: social['linkedin'],
+          color: const Color(0xFF0077B5),
+          tooltip: 'LinkedIn',
         ),
       );
     }
 
-    // GitHub usando icono material (no hay SVG disponible)
+    // GitHub usando SVG
     if (social['github'] != null) {
       socialIcons.add(
         _socialIconSvg(
           context,
-          'assets/GitHub_icon.svg',
-          social['github'],
-          const Color(0xFF333333),
-          true,
-          'GitHub',
+          svgPath: 'assets/GitHub_icon.svg',
+          url: social['github'],
+          color: const Color(0xFF333333),
+          tooltip: 'GitHub',
+          tint: true,
         ),
       );
     }
 
-    // Website usando icono material
+    // Website usando SVG
     if (social['website'] != null) {
       socialIcons.add(
         _socialIconSvg(
           context,
-          'assets/Website_icon.svg',
-          social['website'],
-          const Color(0xFF4CAF50),
-          true,
-          'Website',
+          svgPath: 'assets/Website_icon.svg',
+          url: social['website'],
+          color: const Color(0xFF4CAF50),
+          tooltip: 'Website',
+          tint: true,
         ),
       );
     }
@@ -281,13 +280,13 @@ class SpeakersScreen extends StatelessWidget {
   }
 
   Widget _socialIconSvg(
-    BuildContext context,
-    String svgPath,
-    String url,
-    Color color,
-    bool tint,
-    String tooltip,
-  ) {
+    BuildContext context, {
+    required String svgPath,
+    required String url,
+    required Color color,
+    required String tooltip,
+    bool tint = false,
+  }) {
     return Tooltip(
       message: tooltip,
       child: InkWell(
@@ -300,7 +299,7 @@ class SpeakersScreen extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
             border: Border.all(color: color.withValues(alpha: 0.3)),
           ),
-          child: (tint)
+          child: tint
               ? SvgPicture.asset(
                   svgPath,
                   width: 18,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../core/data_loader.dart';
 
 class SpeakersScreen extends StatelessWidget {
@@ -282,8 +283,23 @@ class SpeakersScreen extends StatelessWidget {
     );
   }
 
-  void _launchURL(String url) {
-    // En una implementación real, usarías url_launcher
-    print('Abriendo URL: $url');
+  Future<void> _launchURL(String url) async {
+    try {
+      // Asegurar que la URL tenga el protocolo correcto
+      String formattedUrl = url;
+      if (!url.startsWith('http://') && !url.startsWith('https://')) {
+        formattedUrl = 'https://$url';
+      }
+
+      final uri = Uri.parse(formattedUrl);
+
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri, mode: LaunchMode.externalApplication);
+      } else {
+        debugPrint('No se pudo abrir la URL: $formattedUrl');
+      }
+    } catch (e) {
+      debugPrint('Error al abrir URL: $e');
+    }
   }
 }

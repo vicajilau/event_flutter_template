@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../core/data_loader.dart';
 import '../../core/models.dart';
 import 'agenda_screen.dart';
@@ -102,45 +103,79 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 12),
             ],
             if (widget.config.venue != null) ...[
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Icon(
-                    Icons.location_on,
-                    size: 16,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          widget.config.venue!.name,
-                          style: Theme.of(context).textTheme.bodyMedium
-                              ?.copyWith(fontWeight: FontWeight.w500),
-                        ),
-                        Text(
-                          widget.config.venue!.address,
-                          style: Theme.of(context).textTheme.bodySmall
-                              ?.copyWith(
-                                color: Theme.of(
-                                  context,
-                                ).colorScheme.onSurfaceVariant,
-                              ),
-                        ),
-                      ],
+              GestureDetector(
+                onTap: () => _openGoogleMaps(widget.config.venue!),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Icon(
+                      Icons.location_on,
+                      size: 16,
+                      color: Theme.of(context).colorScheme.primary,
                     ),
-                  ),
-                ],
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            widget.config.venue!.name,
+                            style: Theme.of(context).textTheme.bodyMedium
+                                ?.copyWith(
+                                  fontWeight: FontWeight.w500,
+                                  color: Theme.of(context).colorScheme.primary,
+                                  decoration: TextDecoration.underline,
+                                  decorationColor: Theme.of(
+                                    context,
+                                  ).colorScheme.primary,
+                                ),
+                          ),
+                          Text(
+                            widget.config.venue!.address,
+                            style: Theme.of(context).textTheme.bodySmall
+                                ?.copyWith(
+                                  color: Theme.of(context).colorScheme.primary,
+                                  decoration: TextDecoration.underline,
+                                  decorationColor: Theme.of(
+                                    context,
+                                  ).colorScheme.primary,
+                                ),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            'Tap para abrir en Google Maps',
+                            style: Theme.of(context).textTheme.bodySmall
+                                ?.copyWith(
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.onSurfaceVariant,
+                                  fontStyle: FontStyle.italic,
+                                ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
               const SizedBox(height: 12),
             ],
             Text('Año: ${widget.config.year}'),
-            const SizedBox(height: 8),
-            const Text(
-              '¡Bienvenido al evento tecnológico más importante del año!',
-            ),
+            if (widget.config.description != null &&
+                widget.config.description!.isNotEmpty) ...[
+              const SizedBox(height: 12),
+              Text(
+                widget.config.description!,
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
+              ),
+            ] else ...[
+              const SizedBox(height: 8),
+              const Text(
+                '¡Bienvenido al evento tecnológico más importante del año!',
+              ),
+            ],
           ],
         ),
         actions: [
@@ -151,5 +186,20 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
     );
+  }
+
+  Future<void> _openGoogleMaps(Venue venue) async {
+    final query = Uri.encodeComponent('${venue.name}, ${venue.address}');
+    final googleMapsUrl =
+        'https://www.google.com/maps/search/?api=1&query=$query';
+
+    final uri = Uri.parse(googleMapsUrl);
+
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    } else {
+      // Fallback: copiar dirección al portapapeles si no se puede abrir
+      debugPrint('No se pudo abrir Google Maps');
+    }
   }
 }

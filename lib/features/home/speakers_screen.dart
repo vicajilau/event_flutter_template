@@ -217,6 +217,7 @@ class SpeakersScreen extends StatelessWidget {
           'assets/X_icon.svg',
           social['twitter'],
           const Color(0xFF1DA1F2),
+          true,
           'Twitter/X',
         ),
       );
@@ -230,6 +231,7 @@ class SpeakersScreen extends StatelessWidget {
           'assets/LinkedIn_icon.svg',
           social['linkedin'],
           const Color(0xFF0077B5),
+          false,
           'LinkedIn',
         ),
       );
@@ -243,6 +245,7 @@ class SpeakersScreen extends StatelessWidget {
           'assets/GitHub_icon.svg',
           social['github'],
           const Color(0xFF333333),
+          true,
           'GitHub',
         ),
       );
@@ -256,6 +259,7 @@ class SpeakersScreen extends StatelessWidget {
           'assets/Website_icon.svg',
           social['website'],
           const Color(0xFF4CAF50),
+          true,
           'Website',
         ),
       );
@@ -281,6 +285,7 @@ class SpeakersScreen extends StatelessWidget {
     String svgPath,
     String url,
     Color color,
+    bool tint,
     String tooltip,
   ) {
     return Tooltip(
@@ -295,12 +300,14 @@ class SpeakersScreen extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
             border: Border.all(color: color.withValues(alpha: 0.3)),
           ),
-          child: SvgPicture.asset(
-            svgPath,
-            width: 18,
-            height: 18,
-            colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
-          ),
+          child: (tint)
+              ? SvgPicture.asset(
+                  svgPath,
+                  width: 18,
+                  height: 18,
+                  colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
+                )
+              : SvgPicture.asset(svgPath, width: 18, height: 18),
         ),
       ),
     );

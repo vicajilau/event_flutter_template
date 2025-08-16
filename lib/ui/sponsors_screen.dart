@@ -7,7 +7,7 @@ import '../l10n/app_localizations.dart';
 class SponsorsScreen extends StatelessWidget {
   /// Data loader for fetching sponsor information
   final DataLoader dataLoader;
-  
+
   const SponsorsScreen({super.key, required this.dataLoader});
 
   @override
@@ -46,7 +46,11 @@ class SponsorsScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(Icons.business_outlined, size: 64, color: Colors.grey),
+                const Icon(
+                  Icons.business_outlined,
+                  size: 64,
+                  color: Colors.grey,
+                ),
                 const SizedBox(height: 16),
                 Text(AppLocalizations.of(context)!.noSponsorsRegistered),
               ],

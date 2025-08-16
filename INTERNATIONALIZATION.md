@@ -18,11 +18,13 @@ Se ha implementado un sistema completo de internacionalización (i18n) para la a
 ## 📁 Archivos Creados/Modificados
 
 ### Configuración de Internacionalización
+
 - `l10n.yaml` - Configuración de generación de localizaciones
 - `pubspec.yaml` - Dependencias de internacionalización agregadas
 - `lib/l10n/app_*.arb` - Archivos de traducción para cada idioma
 
 ### Archivos de Traducción
+
 - `lib/l10n/app_en.arb` - Traducciones en inglés (template)
 - `lib/l10n/app_es.arb` - Traducciones en español
 - `lib/l10n/app_gl.arb` - Traducciones en gallego
@@ -33,6 +35,7 @@ Se ha implementado un sistema completo de internacionalización (i18n) para la a
 - `lib/l10n/app_it.arb` - Traducciones en italiano
 
 ### Código Actualizado
+
 - `lib/main.dart` - Configuración de localizaciones y comentarios en inglés
 - `lib/ui/home_screen.dart` - Textos localizados y documentación
 - `lib/ui/speakers_screen.dart` - Textos localizados y documentación
@@ -43,11 +46,13 @@ Se ha implementado un sistema completo de internacionalización (i18n) para la a
 ## 🔧 Funcionalidades Implementadas
 
 ### 1. Sistema de Localización
+
 - **Detección automática** del idioma del dispositivo
 - **Fallback** al inglés si el idioma no está soportado
 - **Generación automática** de clases de localización
 
 ### 2. Textos Traducidos
+
 - Mensajes de carga y error
 - Etiquetas de navegación
 - Información de eventos
@@ -55,6 +60,7 @@ Se ha implementado un sistema completo de internacionalización (i18n) para la a
 - Tooltips y mensajes de estado
 
 ### 3. Documentación en Inglés
+
 - **Comentarios triple barra (///)** en todas las clases y métodos públicos
 - **Descripción de parámetros** y funcionalidad
 - **Documentación de widgets** y su propósito
@@ -62,6 +68,7 @@ Se ha implementado un sistema completo de internacionalización (i18n) para la a
 ## 🚀 Cómo Funciona
 
 ### Configuración Automática
+
 ```dart
 // En main.dart
 localizationsDelegates: const [
@@ -71,13 +78,14 @@ localizationsDelegates: const [
   GlobalCupertinoLocalizations.delegate,
 ],
 supportedLocales: const [
-  Locale('en'), Locale('es'), Locale('gl'), 
-  Locale('ca'), Locale('eu'), Locale('pt'), 
+  Locale('en'), Locale('es'), Locale('gl'),
+  Locale('ca'), Locale('eu'), Locale('pt'),
   Locale('fr'), Locale('it'),
 ],
 ```
 
 ### Uso en Widgets
+
 ```dart
 // Ejemplo de uso
 Text(AppLocalizations.of(context)!.loadingSpeakers)

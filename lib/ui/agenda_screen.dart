@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../core/data_loader.dart';
-import '../../core/models.dart';
+import '../core/core.dart';
 
 class AgendaScreen extends StatelessWidget {
   final DataLoader dataLoader;

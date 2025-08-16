@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'core/config_loader.dart';
-import 'core/data_loader.dart';
-import 'features/home/home_screen.dart';
+import 'core/core.dart';
+import 'ui/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

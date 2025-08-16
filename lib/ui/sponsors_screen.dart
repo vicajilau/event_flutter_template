@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../core/data_loader.dart';
+import '../core/core.dart';
 
 class SponsorsScreen extends StatelessWidget {
   final DataLoader dataLoader;
@@ -90,7 +90,7 @@ class SponsorsScreen extends StatelessWidget {
                     return Card(
                       child: InkWell(
                         onTap: sponsor['website'] != null
-                            ? () => _launchURL(sponsor['website'])
+                            ? () => context.openUrl(sponsor['website'])
                             : null,
                         borderRadius: BorderRadius.circular(12),
                         child: Padding(
@@ -105,9 +105,10 @@ class SponsorsScreen extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(8),
                                     color: Colors.white,
                                     border: Border.all(
-                                      color: Theme.of(
-                                        context,
-                                      ).colorScheme.outline.withValues(alpha: 0.2),
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .outline
+                                          .withValues(alpha: 0.2),
                                     ),
                                   ),
                                   child: sponsor['logo'] != null
@@ -166,10 +167,5 @@ class SponsorsScreen extends StatelessWidget {
         );
       },
     );
-  }
-
-  void _launchURL(String url) {
-    // En una implementación real, usarías url_launcher
-    print('Abriendo URL: $url');
   }
 }

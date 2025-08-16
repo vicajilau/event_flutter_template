@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:http/http.dart' as http;
-import 'models.dart';
+import '../models/models.dart';
 
 class DataLoader {
   final SiteConfig config;

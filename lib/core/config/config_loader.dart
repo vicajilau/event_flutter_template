@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:http/http.dart' as http;
-import 'models.dart';
+import '../models/models.dart';
 
 class ConfigLoader {
   // Lee las variables de entorno. Si no se definen, usa valores por defecto.

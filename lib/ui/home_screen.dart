@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
-import '../../core/data_loader.dart';
-import '../../core/models.dart';
+import '../core/core.dart';
 import 'agenda_screen.dart';
 import 'speakers_screen.dart';
 import 'sponsors_screen.dart';
@@ -193,13 +191,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final googleMapsUrl =
         'https://www.google.com/maps/search/?api=1&query=$query';
 
-    final uri = Uri.parse(googleMapsUrl);
-
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri, mode: LaunchMode.externalApplication);
-    } else {
-      // Fallback: copiar dirección al portapapeles si no se puede abrir
-      debugPrint('No se pudo abrir Google Maps');
-    }
+    // Usar la extensión para abrir URL desde el contexto
+    await context.openUrl(googleMapsUrl);
   }
 }

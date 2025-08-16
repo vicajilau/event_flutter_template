@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:url_launcher/url_launcher.dart';
-import '../../core/data_loader.dart';
+import '../core/core.dart';
+import 'widgets/widgets.dart';
 
 class SpeakersScreen extends StatelessWidget {
   final DataLoader dataLoader;
@@ -193,7 +192,7 @@ class SpeakersScreen extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
                     const SizedBox(height: 8),
-                    _buildSocialLinks(context, speaker['social']),
+                    SocialIconsRow(social: speaker['social']),
                   ],
                 ),
               ),
@@ -202,133 +201,5 @@ class SpeakersScreen extends StatelessWidget {
         );
       },
     );
-  }
-
-  Widget _buildSocialLinks(BuildContext context, dynamic social) {
-    if (social == null) return const SizedBox.shrink();
-
-    final List<Widget> socialIcons = [];
-
-    // Twitter/X usando SVG
-    if (social['twitter'] != null) {
-      socialIcons.add(
-        _socialIconSvg(
-          context,
-          svgPath: 'assets/X_icon.svg',
-          url: social['twitter'],
-          color: const Color(0xFF1DA1F2),
-          tooltip: 'Twitter/X',
-          tint: true,
-        ),
-      );
-    }
-
-    // LinkedIn usando SVG
-    if (social['linkedin'] != null) {
-      socialIcons.add(
-        _socialIconSvg(
-          context,
-          svgPath: 'assets/LinkedIn_icon.svg',
-          url: social['linkedin'],
-          color: const Color(0xFF0077B5),
-          tooltip: 'LinkedIn',
-        ),
-      );
-    }
-
-    // GitHub usando SVG
-    if (social['github'] != null) {
-      socialIcons.add(
-        _socialIconSvg(
-          context,
-          svgPath: 'assets/GitHub_icon.svg',
-          url: social['github'],
-          color: const Color(0xFF333333),
-          tooltip: 'GitHub',
-          tint: true,
-        ),
-      );
-    }
-
-    // Website usando SVG
-    if (social['website'] != null) {
-      socialIcons.add(
-        _socialIconSvg(
-          context,
-          svgPath: 'assets/Website_icon.svg',
-          url: social['website'],
-          color: const Color(0xFF4CAF50),
-          tooltip: 'Website',
-          tint: true,
-        ),
-      );
-    }
-
-    if (socialIcons.isEmpty) return const SizedBox.shrink();
-
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: socialIcons
-          .map(
-            (icon) => Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 4),
-              child: icon,
-            ),
-          )
-          .toList(),
-    );
-  }
-
-  Widget _socialIconSvg(
-    BuildContext context, {
-    required String svgPath,
-    required String url,
-    required Color color,
-    required String tooltip,
-    bool tint = false,
-  }) {
-    return Tooltip(
-      message: tooltip,
-      child: InkWell(
-        onTap: () => _launchURL(url),
-        borderRadius: BorderRadius.circular(20),
-        child: Container(
-          padding: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            color: color.withValues(alpha: 0.1),
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: color.withValues(alpha: 0.3)),
-          ),
-          child: tint
-              ? SvgPicture.asset(
-                  svgPath,
-                  width: 18,
-                  height: 18,
-                  colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
-                )
-              : SvgPicture.asset(svgPath, width: 18, height: 18),
-        ),
-      ),
-    );
-  }
-
-  Future<void> _launchURL(String url) async {
-    try {
-      // Asegurar que la URL tenga el protocolo correcto
-      String formattedUrl = url;
-      if (!url.startsWith('http://') && !url.startsWith('https://')) {
-        formattedUrl = 'https://$url';
-      }
-
-      final uri = Uri.parse(formattedUrl);
-
-      if (await canLaunchUrl(uri)) {
-        await launchUrl(uri, mode: LaunchMode.externalApplication);
-      } else {
-        debugPrint('No se pudo abrir la URL: $formattedUrl');
-      }
-    } catch (e) {
-      debugPrint('Error al abrir URL: $e');
-    }
   }
 }

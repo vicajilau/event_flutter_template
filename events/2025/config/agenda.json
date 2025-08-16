@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Apertura y Keynote",
+    "time": "09:00 - 09:30",
+    "speaker": "Equipo organizador",
+    "description": "Bienvenida al DevFest 2025"
+  },
+  {
+    "title": "Flutter para Web: Mejores prácticas",
+    "time": "09:30 - 10:15",
+    "speaker": "Speaker 1",
+    "description": "Cómo crear aplicaciones web robustas con Flutter"
+  },
+  {
+    "title": "Coffee Break",
+    "time": "10:15 - 10:45",
+    "speaker": "",
+    "description": "Networking y café"
+  },
+  {
+    "title": "Firebase y Flutter: Una combinación perfecta",
+    "time": "10:45 - 11:30",
+    "speaker": "Speaker 2",
+    "description": "Integración completa de Firebase en aplicaciones Flutter"
+  }
+]

@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Google",
+    "type": "Patrocinador Principal",
+    "logo": "https://via.placeholder.com/200x100",
+    "website": "https://google.com"
+  },
+  {
+    "name": "Firebase",
+    "type": "Patrocinador Gold",
+    "logo": "https://via.placeholder.com/200x100",
+    "website": "https://firebase.google.com"
+  },
+  {
+    "name": "Flutter",
+    "type": "Patrocinador Silver",
+    "logo": "https://via.placeholder.com/200x100",
+    "website": "https://flutter.dev"
+  }
+]

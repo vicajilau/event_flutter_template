@@ -5,11 +5,33 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Tech Conference",
+            "name": "Tech Conference (dev)",
             "cwd": "code",
             "request": "launch",
             "type": "dart",
             "program": "lib/main.dart",
+            "args": []
+        },
+        {
+            "name": "Tech Conference (pre)",
+            "cwd": "code",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main.dart",
+            "args": [
+                "--dart-define=APP_ENV=pre",
+                "--dart-define=GITHUB_BRANCH=develop"
+            ]
+        },
+        {
+            "name": "Tech Conference (pro)",
+            "cwd": "code",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main.dart",
+            "args": [
+                "--dart-define=APP_ENV=pro"
+            ]
         }
     ]
 }

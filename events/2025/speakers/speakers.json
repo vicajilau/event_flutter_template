@@ -1,0 +1,19 @@
+[
+  {
+    "name": "Alice Doe",
+    "bio": "Flutter GDE, Google",
+    "image": "https://via.placeholder.com/150",
+    "social": {
+      "twitter": "https://twitter.com/alice"
+    }
+  },
+  {
+    "name": "Bob Smith",
+    "bio": "Senior Developer Advocate at Firebase",
+    "image": "https://via.placeholder.com/150",
+    "social": {
+      "twitter": "https://twitter.com/bob",
+      "linkedin": "https://linkedin.com/in/bobsmith"
+    }
+  }
+]

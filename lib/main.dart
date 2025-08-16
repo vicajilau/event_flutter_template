@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'core/core.dart';
 import 'ui/home_screen.dart';
+import 'l10n/app_localizations.dart';
 
+/// Entry point of the Flutter application for tech events
+/// Initializes configuration and data loader before running the app
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -11,8 +15,13 @@ void main() async {
   runApp(MyApp(config: config, dataLoader: dataLoader));
 }
 
+/// Main application widget that sets up the Material Design theme and localization
+/// Supports multiple languages and environments (dev, pre, pro)
 class MyApp extends StatelessWidget {
+  /// Site configuration containing event details and styling
   final dynamic config;
+
+  /// Data loader for fetching speakers, agenda, and sponsors
   final dynamic dataLoader;
 
   const MyApp({super.key, required this.config, required this.dataLoader});
@@ -29,6 +38,22 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: config.eventName,
       debugShowCheckedModeBanner: false,
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('en'), // English
+        Locale('es'), // Spanish
+        Locale('gl'), // Galician
+        Locale('ca'), // Catalan
+        Locale('eu'), // Basque
+        Locale('pt'), // Portuguese
+        Locale('fr'), // French
+        Locale('it'), // Italian
+      ],
       theme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(

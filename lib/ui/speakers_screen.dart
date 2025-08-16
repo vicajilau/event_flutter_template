@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import '../core/core.dart';
+import '../l10n/app_localizations.dart';
 import 'widgets/widgets.dart';
 
+/// Screen that displays a grid of speakers with their information and social links
+/// Fetches speaker data from the configured data source and displays it in cards
 class SpeakersScreen extends StatelessWidget {
+  /// Data loader for fetching speaker information
   final DataLoader dataLoader;
+
   const SpeakersScreen({super.key, required this.dataLoader});
 
   @override
@@ -12,13 +17,13 @@ class SpeakersScreen extends StatelessWidget {
       future: dataLoader.loadSpeakers(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(
+          return Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CircularProgressIndicator(),
-                SizedBox(height: 16),
-                Text('Cargando ponentes...'),
+                const CircularProgressIndicator(),
+                const SizedBox(height: 16),
+                Text(AppLocalizations.of(context)!.loadingSpeakers),
               ],
             ),
           );
@@ -28,9 +33,9 @@ class SpeakersScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.error_outline, size: 64, color: Colors.red),
-                SizedBox(height: 16),
-                Text('Error cargando ponentes'),
+                const Icon(Icons.error_outline, size: 64, color: Colors.red),
+                const SizedBox(height: 16),
+                Text(AppLocalizations.of(context)!.errorLoadingSpeakers),
               ],
             ),
           );
@@ -38,13 +43,13 @@ class SpeakersScreen extends StatelessWidget {
         final speakers = snapshot.data ?? [];
 
         if (speakers.isEmpty) {
-          return const Center(
+          return Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.people_outline, size: 64, color: Colors.grey),
-                SizedBox(height: 16),
-                Text('No hay ponentes registrados'),
+                const Icon(Icons.people_outline, size: 64, color: Colors.grey),
+                const SizedBox(height: 16),
+                Text(AppLocalizations.of(context)!.noSpeakersRegistered),
               ],
             ),
           );
@@ -115,7 +120,9 @@ class SpeakersScreen extends StatelessWidget {
                                             ),
                                             const SizedBox(height: 8),
                                             Text(
-                                              'Cargando...',
+                                              AppLocalizations.of(
+                                                context,
+                                              )!.loading,
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .bodySmall
@@ -148,7 +155,9 @@ class SpeakersScreen extends StatelessWidget {
                                           ),
                                           const SizedBox(height: 4),
                                           Text(
-                                            'Error al cargar imagen',
+                                            AppLocalizations.of(
+                                              context,
+                                            )!.errorLoadingImage,
                                             style: Theme.of(
                                               context,
                                             ).textTheme.bodySmall,

@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import '../core/core.dart';
+import '../l10n/app_localizations.dart';
 
+/// Screen that displays the event agenda with sessions organized by days and tracks
+/// Supports multiple days and tracks with color-coded sessions
 class AgendaScreen extends StatelessWidget {
+  /// Data loader for fetching agenda information
   final DataLoader dataLoader;
+
   const AgendaScreen({super.key, required this.dataLoader});
 
   @override
@@ -11,13 +16,13 @@ class AgendaScreen extends StatelessWidget {
       future: dataLoader.loadAgenda(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(
+          return Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CircularProgressIndicator(),
-                SizedBox(height: 16),
-                Text('Cargando agenda...'),
+                const CircularProgressIndicator(),
+                const SizedBox(height: 16),
+                Text(AppLocalizations.of(context)!.loadingAgenda),
               ],
             ),
           );
@@ -29,7 +34,11 @@ class AgendaScreen extends StatelessWidget {
               children: [
                 const Icon(Icons.error_outline, size: 64, color: Colors.red),
                 const SizedBox(height: 16),
-                Text('Error cargando agenda: ${snapshot.error}'),
+                Text(
+                  AppLocalizations.of(
+                    context,
+                  )!.errorLoadingAgenda('${snapshot.error}'),
+                ),
                 const SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: () {
@@ -41,7 +50,7 @@ class AgendaScreen extends StatelessWidget {
                       ),
                     );
                   },
-                  child: const Text('Reintentar'),
+                  child: Text(AppLocalizations.of(context)!.retry),
                 ),
               ],
             ),
@@ -50,13 +59,13 @@ class AgendaScreen extends StatelessWidget {
         final agendaDays = snapshot.data ?? [];
 
         if (agendaDays.isEmpty) {
-          return const Center(
+          return Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.event_busy, size: 64, color: Colors.grey),
-                SizedBox(height: 16),
-                Text('No hay eventos programados'),
+                const Icon(Icons.event_busy, size: 64, color: Colors.grey),
+                const SizedBox(height: 16),
+                Text(AppLocalizations.of(context)!.noEventsScheduled),
               ],
             ),
           );
@@ -204,7 +213,7 @@ class AgendaScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Text(
-                      _getSessionTypeLabel(session.type),
+                      _getSessionTypeLabel(context, session.type),
                       style: TextStyle(
                         color: Theme.of(context).colorScheme.onSurfaceVariant,
                         fontSize: 10,
@@ -286,14 +295,17 @@ class AgendaScreen extends StatelessWidget {
     }
   }
 
-  String _getSessionTypeLabel(String type) {
+  /// Returns the localized label for the given session type
+  String _getSessionTypeLabel(BuildContext context, String type) {
     switch (type) {
       case 'keynote':
-        return 'KEYNOTE';
+        return AppLocalizations.of(context)!.keynote;
       case 'talk':
-        return 'CHARLA';
+        return AppLocalizations.of(context)!.talk;
       case 'workshop':
-        return 'TALLER';
+        return AppLocalizations.of(context)!.workshop;
+      case 'break':
+        return AppLocalizations.of(context)!.sessionBreak;
       case 'panel':
         return 'PANEL';
       default:

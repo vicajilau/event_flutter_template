@@ -2,29 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../core/core.dart';
 
-/// Widget reutilizable para mostrar iconos sociales SVG con enlace
+/// Reusable widget for displaying social media SVG icons with links
+/// Supports customizable colors, sizes, and tooltips
 class SocialIconSvg extends StatelessWidget {
-  /// Ruta del archivo SVG
+  /// Path to the SVG asset file
   final String svgPath;
 
-  /// URL a la que apunta el icono
+  /// URL that the icon links to
   final String url;
 
-  /// Color del icono y fondo
+  /// Color for the icon and background styling
   final Color color;
 
-  /// Texto del tooltip
+  /// Tooltip text displayed on hover
   final String tooltip;
 
-  /// Si debe aplicar tint al SVG (cambiar su color)
+  /// Whether to apply color tinting to the SVG
   final bool tint;
 
-  /// Tamaño del icono (por defecto 18)
+  /// Size of the icon in logical pixels (default: 18)
   final double iconSize;
 
-  /// Padding interno del container (por defecto 8)
+  /// Internal padding of the container (default: 8)
   final double padding;
-
   const SocialIconSvg({
     super.key,
     required this.svgPath,
@@ -64,17 +64,17 @@ class SocialIconSvg extends StatelessWidget {
   }
 }
 
-/// Widget para mostrar una lista de iconos sociales
+/// Widget for displaying a row of social media icons
+/// Automatically generates icons based on available social media data
 class SocialIconsRow extends StatelessWidget {
-  /// Información social del objeto (Map con claves como 'twitter', 'linkedin', etc.)
+  /// Social media information object (Map with keys like 'twitter', 'linkedin', etc.)
   final dynamic social;
 
-  /// Espaciado horizontal entre iconos (por defecto 4)
+  /// Horizontal spacing between icons (default: 4)
   final double spacing;
 
-  /// Tamaño de los iconos (por defecto 18)
+  /// Size of the icons in logical pixels (default: 18)
   final double iconSize;
-
   const SocialIconsRow({
     super.key,
     required this.social,
@@ -88,7 +88,7 @@ class SocialIconsRow extends StatelessWidget {
 
     final List<Widget> socialIcons = [];
 
-    // Twitter/X usando SVG
+    // Twitter/X using SVG
     if (social['twitter'] != null) {
       socialIcons.add(
         SocialIconSvg(
@@ -102,7 +102,7 @@ class SocialIconsRow extends StatelessWidget {
       );
     }
 
-    // LinkedIn usando SVG
+    // LinkedIn using SVG
     if (social['linkedin'] != null) {
       socialIcons.add(
         SocialIconSvg(
@@ -115,7 +115,7 @@ class SocialIconsRow extends StatelessWidget {
       );
     }
 
-    // GitHub usando SVG
+    // GitHub using SVG
     if (social['github'] != null) {
       socialIcons.add(
         SocialIconSvg(
@@ -129,7 +129,7 @@ class SocialIconsRow extends StatelessWidget {
       );
     }
 
-    // Website usando SVG
+    // Website using SVG
     if (social['website'] != null) {
       socialIcons.add(
         SocialIconSvg(

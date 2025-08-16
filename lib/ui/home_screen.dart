@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import '../core/core.dart';
+import '../l10n/app_localizations.dart';
 import 'agenda_screen.dart';
 import 'speakers_screen.dart';
 import 'sponsors_screen.dart';
 
+/// Main home screen widget that displays the event information and navigation
+/// Features a bottom navigation bar with tabs for Agenda, Speakers, and Sponsors
 class HomeScreen extends StatefulWidget {
+  /// Site configuration containing event details
   final SiteConfig config;
+
+  /// Data loader for fetching content from various sources
   final DataLoader dataLoader;
 
   const HomeScreen({super.key, required this.config, required this.dataLoader});
@@ -14,11 +20,15 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
+/// State class for HomeScreen that manages navigation between tabs
 class _HomeScreenState extends State<HomeScreen> {
+  /// Currently selected tab index
   int _selectedIndex = 0;
 
+  /// List of screens to display in the IndexedStack
   late final List<Widget> _screens;
 
+  /// Initializes the screens list with data loader
   @override
   void initState() {
     super.initState();
@@ -29,6 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
     ];
   }
 
+  /// Handles tab selection changes
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -51,27 +62,28 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: NavigationBar(
         selectedIndex: _selectedIndex,
         onDestinationSelected: _onItemTapped,
-        destinations: const [
+        destinations: [
           NavigationDestination(
-            icon: Icon(Icons.schedule),
-            selectedIcon: Icon(Icons.schedule),
-            label: 'Agenda',
+            icon: const Icon(Icons.schedule),
+            selectedIcon: const Icon(Icons.schedule),
+            label: AppLocalizations.of(context)!.agenda,
           ),
           NavigationDestination(
-            icon: Icon(Icons.people_outline),
-            selectedIcon: Icon(Icons.people),
-            label: 'Speakers',
+            icon: const Icon(Icons.people_outline),
+            selectedIcon: const Icon(Icons.people),
+            label: AppLocalizations.of(context)!.speakers,
           ),
           NavigationDestination(
-            icon: Icon(Icons.business_outlined),
-            selectedIcon: Icon(Icons.business),
-            label: 'Sponsors',
+            icon: const Icon(Icons.business_outlined),
+            selectedIcon: const Icon(Icons.business),
+            label: AppLocalizations.of(context)!.sponsors,
           ),
         ],
       ),
     );
   }
 
+  /// Shows a dialog with event information including dates, venue, and description
   void _showEventInfo(BuildContext context) {
     showDialog(
       context: context,
@@ -141,7 +153,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           const SizedBox(height: 4),
                           Text(
-                            'Tap para abrir en Google Maps',
+                            AppLocalizations.of(context)!.openUrl,
                             style: Theme.of(context).textTheme.bodySmall
                                 ?.copyWith(
                                   color: Theme.of(
@@ -170,22 +182,21 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ] else ...[
               const SizedBox(height: 8),
-              const Text(
-                '¡Bienvenido al evento tecnológico más importante del año!',
-              ),
+              Text(AppLocalizations.of(context)!.description),
             ],
           ],
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Cerrar'),
+            child: Text(AppLocalizations.of(context)!.close),
           ),
         ],
       ),
     );
   }
 
+  /// Opens Google Maps with the venue location
   Future<void> _openGoogleMaps(Venue venue) async {
     final query = Uri.encodeComponent('${venue.name}, ${venue.address}');
     final googleMapsUrl =

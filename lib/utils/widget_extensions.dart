@@ -13,7 +13,7 @@ extension BuildContextExtensions on BuildContext {
   /// ```
   Future<void> openUrl(String url) async {
     try {
-      // Asegurar que la URL tenga el protocolo correcto
+      // Ensure the URL has the correct protocol
       String formattedUrl = url;
       if (!url.startsWith('http://') && !url.startsWith('https://')) {
         formattedUrl = 'https://$url';
@@ -24,10 +24,10 @@ extension BuildContextExtensions on BuildContext {
       if (await url_launcher.canLaunchUrl(uri)) {
         await url_launcher.launchUrl(uri, mode: url_launcher.LaunchMode.externalApplication);
       } else {
-        debugPrint('No se pudo abrir la URL: $formattedUrl');
+        debugPrint('URL could not be launched: $formattedUrl');
       }
     } catch (e) {
-      debugPrint('Error al abrir URL: $e');
+      debugPrint('Error opening URL: $e');
     }
   }
 

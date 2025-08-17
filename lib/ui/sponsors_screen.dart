@@ -58,10 +58,10 @@ class SponsorsScreen extends StatelessWidget {
           );
         }
 
-        // Agrupar sponsors por tipo
+        // Group sponsors by type
         final Map<String, List<dynamic>> groupedSponsors = {};
         for (final sponsor in sponsors) {
-          final type = sponsor['type'] ?? 'Otros';
+          final type = sponsor['type'] ?? 'Others';
           groupedSponsors.putIfAbsent(type, () => []).add(sponsor);
         }
 

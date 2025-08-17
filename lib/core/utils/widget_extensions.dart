@@ -1,42 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart' as url_launcher;
 
-/// Extensions for Widget class to add common functionality
-extension WidgetExtensions on Widget {
-  /// Launches a URL with proper error handling and formatting
-  ///
-  /// Automatically adds https:// protocol if missing
-  /// Shows debug messages on errors
-  ///
-  /// Usage:
-  /// ```dart
-  /// widget.openUrl('https://example.com');
-  /// widget.openUrl('example.com'); // automatically adds https://
-  /// ```
-  Future<void> openUrl(String url) async {
-    try {
-      // Asegurar que la URL tenga el protocolo correcto
-      String formattedUrl = url;
-      if (!url.startsWith('http://') && !url.startsWith('https://')) {
-        formattedUrl = 'https://$url';
-      }
-
-      final uri = Uri.parse(formattedUrl);
-
-      if (await url_launcher.canLaunchUrl(uri)) {
-        await url_launcher.launchUrl(
-          uri,
-          mode: url_launcher.LaunchMode.externalApplication,
-        );
-      } else {
-        debugPrint('No se pudo abrir la URL: $formattedUrl');
-      }
-    } catch (e) {
-      debugPrint('Error al abrir URL: $e');
-    }
-  }
-}
-
 /// Extensions for BuildContext to add common functionality
 extension BuildContextExtensions on BuildContext {
   /// Launches a URL with proper error handling and formatting
@@ -49,7 +13,7 @@ extension BuildContextExtensions on BuildContext {
   /// ```
   Future<void> openUrl(String url) async {
     try {
-      // Asegurar que la URL tenga el protocolo correcto
+      // Ensure the URL has the correct protocol
       String formattedUrl = url;
       if (!url.startsWith('http://') && !url.startsWith('https://')) {
         formattedUrl = 'https://$url';
@@ -63,10 +27,10 @@ extension BuildContextExtensions on BuildContext {
           mode: url_launcher.LaunchMode.externalApplication,
         );
       } else {
-        debugPrint('No se pudo abrir la URL: $formattedUrl');
+        debugPrint('URL could not be launched: $formattedUrl');
       }
     } catch (e) {
-      debugPrint('Error al abrir URL: $e');
+      debugPrint('Error opening URL: $e');
     }
   }
 

@@ -202,7 +202,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final googleMapsUrl =
         'https://www.google.com/maps/search/?api=1&query=$query';
 
-    // Usar la extensión para abrir URL desde el contexto
+    // Use the extension to open URL from context
     await context.openUrl(googleMapsUrl);
   }
 }

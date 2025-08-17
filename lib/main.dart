@@ -38,22 +38,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: config.eventName,
       debugShowCheckedModeBanner: false,
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: const [
-        Locale('en'), // English
-        Locale('es'), // Spanish
-        Locale('gl'), // Galician
-        Locale('ca'), // Catalan
-        Locale('eu'), // Basque
-        Locale('pt'), // Portuguese
-        Locale('fr'), // French
-        Locale('it'), // Italian
-      ],
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       theme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(

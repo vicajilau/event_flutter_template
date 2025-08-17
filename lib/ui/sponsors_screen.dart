@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../core/core.dart';
 import '../l10n/app_localizations.dart';
+import 'widgets/widgets.dart';
 
 /// Screen that displays event sponsors in a responsive grid layout
 /// Fetches sponsor data and displays logos with clickable links
@@ -9,7 +10,6 @@ class SponsorsScreen extends StatelessWidget {
   final DataLoader dataLoader;
 
   const SponsorsScreen({super.key, required this.dataLoader});
-
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<dynamic>>(
@@ -121,25 +121,20 @@ class SponsorsScreen extends StatelessWidget {
                                     ),
                                   ),
                                   child: sponsor['logo'] != null
-                                      ? ClipRRect(
+                                      ? NetworkImageWidget(
+                                          imageUrl: sponsor['logo'],
+                                          fit: BoxFit.contain,
                                           borderRadius: BorderRadius.circular(
                                             8,
                                           ),
-                                          child: Image.network(
-                                            sponsor['logo'],
-                                            fit: BoxFit.contain,
-                                            errorBuilder:
-                                                (context, error, stackTrace) {
-                                                  return Center(
-                                                    child: Icon(
-                                                      Icons.business,
-                                                      size: 32,
-                                                      color: Theme.of(context)
-                                                          .colorScheme
-                                                          .onSurfaceVariant,
-                                                    ),
-                                                  );
-                                                },
+                                          errorWidget: Center(
+                                            child: Icon(
+                                              Icons.business,
+                                              size: 32,
+                                              color: Theme.of(
+                                                context,
+                                              ).colorScheme.onSurfaceVariant,
+                                            ),
                                           ),
                                         )
                                       : Center(

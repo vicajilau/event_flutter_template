@@ -69,7 +69,6 @@ Event schedule with multi-day and multi-track support:
   "days": [
     {
       "date": "2025-03-15",
-      "dayName": "Sábado",
       "tracks": [
         {
           "name": "Sala Principal",

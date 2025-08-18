@@ -94,7 +94,6 @@ void main() {
       test('AgendaDay.fromJson creates object correctly', () {
         final json = {
           'date': '2025-09-15',
-          'dayName': 'Day 1',
           'tracks': [
             {
               'name': 'Main Track',
@@ -115,7 +114,6 @@ void main() {
         final agendaDay = AgendaDay.fromJson(json);
 
         expect(agendaDay.date, '2025-09-15');
-        expect(agendaDay.dayName, 'Day 1');
         expect(agendaDay.tracks.length, 1);
         expect(agendaDay.tracks[0].name, 'Main Track');
         expect(agendaDay.tracks[0].sessions.length, 1);

@@ -78,7 +78,14 @@ class AgendaScreen extends StatelessWidget {
               if (agendaDays.length > 1)
                 TabBar(
                   tabs: agendaDays
-                      .map((day) => Tab(text: day.dayName))
+                      .map(
+                        (day) => Tab(
+                          text: EventDateUtils.getShortDayName(
+                            day.date,
+                            context,
+                          ),
+                        ),
+                      )
                       .toList(),
                 ),
               Expanded(
@@ -115,7 +122,7 @@ class AgendaScreen extends StatelessWidget {
               ),
               const SizedBox(width: 12),
               Text(
-                '${day.dayName} - ${day.date}',
+                '${EventDateUtils.getDayName(day.date, context)} - ${EventDateUtils.getFormattedDate(day.date, context)}',
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
                   color: Theme.of(context).colorScheme.onPrimaryContainer,
                   fontWeight: FontWeight.bold,

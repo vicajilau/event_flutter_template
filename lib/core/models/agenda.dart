@@ -1,24 +1,22 @@
 /// Represents a single day in the event agenda
-/// Contains the date, day name, and list of tracks for that day
+/// Contains the date and list of tracks for that day
+/// Day name is automatically derived from the date using localization
 class AgendaDay {
   /// The date of the event day in ISO format (YYYY-MM-DD)
   final String date;
-
-  /// The display name for the day (e.g., "Saturday", "Sábado")
-  final String dayName;
 
   /// List of tracks/rooms available on this day
   final List<Track> tracks;
 
   /// Creates a new AgendaDay instance
-  AgendaDay({required this.date, required this.dayName, required this.tracks});
+  AgendaDay({required this.date, required this.tracks});
 
   /// Creates an AgendaDay from JSON data
   /// Parses the tracks array and converts each track to a Track object
+  /// The day name is automatically generated from the date using localization
   factory AgendaDay.fromJson(Map<String, dynamic> json) {
     return AgendaDay(
       date: json['date'],
-      dayName: json['dayName'],
       tracks: (json['tracks'] as List)
           .map((track) => Track.fromJson(track))
           .toList(),

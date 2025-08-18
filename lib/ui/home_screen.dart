@@ -1,4 +1,5 @@
 import 'package:event_flutter_template/ui/widgets/language_selector.dart';
+import 'package:event_flutter_template/ui/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import '../core/core.dart';
 import '../l10n/app_localizations.dart';

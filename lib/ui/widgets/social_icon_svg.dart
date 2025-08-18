@@ -1,6 +1,6 @@
+import 'package:event_flutter_template/ui/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../core/core.dart';
 
 /// Reusable widget for displaying social media SVG icons with links
 /// Supports customizable colors, sizes, and tooltips

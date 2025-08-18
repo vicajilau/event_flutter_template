@@ -96,4 +96,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get openUrl => 'Abrir URL';
+
+  @override
+  String get changeLanguage => 'Alterar Idioma';
 }

@@ -96,4 +96,7 @@ class AppLocalizationsCa extends AppLocalizations {
 
   @override
   String get openUrl => 'Obrir URL';
+
+  @override
+  String get changeLanguage => 'Canviar Idioma';
 }

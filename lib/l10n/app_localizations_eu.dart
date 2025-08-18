@@ -96,4 +96,7 @@ class AppLocalizationsEu extends AppLocalizations {
 
   @override
   String get openUrl => 'URL ireki';
+
+  @override
+  String get changeLanguage => 'Hizkuntza aldatu';
 }

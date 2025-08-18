@@ -96,4 +96,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get openUrl => 'Abrir URL';
+
+  @override
+  String get changeLanguage => 'Cambiar Idioma';
 }

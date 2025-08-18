@@ -1,3 +1,4 @@
+import 'package:event_flutter_template/ui/widgets/language_selector.dart';
 import 'package:flutter/material.dart';
 import '../core/core.dart';
 import '../l10n/app_localizations.dart';
@@ -14,7 +15,19 @@ class HomeScreen extends StatefulWidget {
   /// Data loader for fetching content from various sources
   final DataLoader dataLoader;
 
-  const HomeScreen({super.key, required this.config, required this.dataLoader});
+  /// Currently selected locale for the application
+  final Locale locale;
+
+  /// Callback function to be called when the locale changes
+  final ValueChanged<Locale> localeChanged;
+
+  const HomeScreen({
+    super.key,
+    required this.config,
+    required this.dataLoader,
+    required this.locale,
+    required this.localeChanged,
+  });
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -39,19 +52,16 @@ class _HomeScreenState extends State<HomeScreen> {
     ];
   }
 
-  /// Handles tab selection changes
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.config.eventName),
         actions: [
+          LanguageSelector(
+            currentLocale: widget.locale,
+            onLanguageChanged: widget.localeChanged,
+          ),
           IconButton(
             icon: const Icon(Icons.info_outline),
             onPressed: () => _showEventInfo(context),
@@ -81,6 +91,13 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
     );
+  }
+
+  /// Handles tab selection changes
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
   }
 
   /// Shows a dialog with event information including dates, venue, and description
@@ -170,7 +187,6 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               const SizedBox(height: 12),
             ],
-            Text('Año: ${widget.config.year}'),
             if (widget.config.description != null &&
                 widget.config.description!.isNotEmpty) ...[
               const SizedBox(height: 12),

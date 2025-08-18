@@ -64,7 +64,7 @@ void main() {
       final dataLoader = createMockDataLoader();
 
       await tester.pumpWidget(
-        createTestApp(HomeScreen(config: config, dataLoader: dataLoader)),
+        createTestApp(HomeScreen(config: config, dataLoader: dataLoader, locale: const Locale('en'), localeChanged: (_) {})),
       );
 
       // Wait for any async operations
@@ -89,7 +89,7 @@ void main() {
       final dataLoader = createMockDataLoader();
 
       await tester.pumpWidget(
-        createTestApp(HomeScreen(config: config, dataLoader: dataLoader)),
+        createTestApp(HomeScreen(config: config, dataLoader: dataLoader, locale: const Locale('en'), localeChanged: (_) {})),
       );
 
       await tester.pumpAndSettle();
@@ -119,7 +119,7 @@ void main() {
       final dataLoader = createMockDataLoader();
 
       await tester.pumpWidget(
-        createTestApp(HomeScreen(config: config, dataLoader: dataLoader)),
+        createTestApp(HomeScreen(config: config, dataLoader: dataLoader, locale: const Locale('en'), localeChanged: (_) {})),
       );
 
       await tester.pumpAndSettle();
@@ -162,7 +162,7 @@ void main() {
             GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: const [Locale('en'), Locale('es')],
-          home: HomeScreen(config: config, dataLoader: dataLoader),
+          home: HomeScreen(config: config, dataLoader: dataLoader, locale: const Locale('en'), localeChanged: (_) {}),
         ),
       );
 
@@ -190,7 +190,7 @@ void main() {
             GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: const [Locale('en'), Locale('es')],
-          home: HomeScreen(config: config, dataLoader: dataLoader),
+          home: HomeScreen(config: config, dataLoader: dataLoader, locale: const Locale('es'), localeChanged: (_) {}),
         ),
       );
 

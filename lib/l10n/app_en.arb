@@ -121,5 +121,9 @@
   "openUrl": "Open URL",
   "@openUrl": {
     "description": "Tooltip for opening external links"
+  },
+  "changeLanguage": "Change Language",
+  "@changeLanguage": {
+    "description": "Tooltip for language selector"
   }
 }

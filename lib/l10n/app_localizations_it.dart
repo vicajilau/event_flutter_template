@@ -99,4 +99,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get openUrl => 'Apri URL';
+
+  @override
+  String get changeLanguage => 'Cambia Lingua';
 }

@@ -28,5 +28,6 @@
   "linkedin": "LinkedIn",
   "github": "GitHub",
   "website": "Site",
-  "openUrl": "Abrir URL"
+  "openUrl": "Abrir URL",
+  "changeLanguage": "Alterar Idioma"
 }

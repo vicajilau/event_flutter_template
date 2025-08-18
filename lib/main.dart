@@ -16,7 +16,7 @@ void main() async {
 
 /// Main application widget that sets up the Material Design theme and localization
 /// Supports multiple languages and environments (dev, pre, pro)
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   /// Site configuration containing event details and styling
   final dynamic config;
 
@@ -26,7 +26,24 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key, required this.config, required this.dataLoader});
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  /// Currently selected locale for the application
+  Locale? _locale;
+
+  /// Changes the application locale
+  void _changeLocale(Locale locale) {
+    setState(() {
+      _locale = locale;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final config = widget.config;
+    final dataLoader = widget.dataLoader;
     final primaryColor = Color(
       int.parse(config.primaryColor.replaceFirst('#', '0xff')),
     );
@@ -39,6 +56,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
+      locale: _locale,
       theme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
@@ -75,7 +93,12 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: HomeScreen(config: config, dataLoader: dataLoader),
+      home: HomeScreen(
+        config: config,
+        dataLoader: dataLoader,
+        locale: _locale ?? AppLocalizations.supportedLocales.first,
+        localeChanged: _changeLocale,
+      ),
     );
   }
 }

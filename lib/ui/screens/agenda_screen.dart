@@ -1,6 +1,8 @@
+import 'package:event_flutter_template/ui/screens/screens.dart';
 import 'package:flutter/material.dart';
-import '../core/core.dart';
-import '../l10n/app_localizations.dart';
+
+import '../../core/core.dart';
+import '../../l10n/app_localizations.dart';
 
 /// Screen that displays the event agenda with sessions organized by days and tracks
 /// Supports multiple days and tracks with color-coded sessions
@@ -127,6 +129,16 @@ class AgendaScreen extends StatelessWidget {
                   color: Theme.of(context).colorScheme.onPrimaryContainer,
                   fontWeight: FontWeight.bold,
                 ),
+              ),
+              const Spacer(),
+              IconButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => AgendaFormScreen()),
+                  );
+                },
+                icon: Icon(Icons.edit, size: 30),
               ),
             ],
           ),

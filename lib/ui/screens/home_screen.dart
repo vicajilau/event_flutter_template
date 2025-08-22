@@ -1,11 +1,10 @@
+import 'package:event_flutter_template/ui/screens/screens.dart';
 import 'package:event_flutter_template/ui/widgets/language_selector.dart';
 import 'package:event_flutter_template/ui/widgets/widgets.dart';
 import 'package:flutter/material.dart';
-import '../core/core.dart';
-import '../l10n/app_localizations.dart';
-import 'agenda_screen.dart';
-import 'speakers_screen.dart';
-import 'sponsors_screen.dart';
+
+import '../../core/core.dart';
+import '../../l10n/app_localizations.dart';
 
 /// Main home screen widget that displays the event information and navigation
 /// Features a bottom navigation bar with tabs for Agenda, Speakers, and Sponsors
@@ -91,6 +90,37 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8),
+        child: SizedBox(
+          height: 85,
+          width: 85,
+          child: FloatingActionButton(
+            onPressed: () {
+              if (_selectedIndex == 0) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AgendaFormScreen()),
+                );
+              } else if (_selectedIndex == 1) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SpeakersFormScreen()),
+                );
+              } else if (_selectedIndex == 2) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SponsorsFormScreen()),
+                );
+              }
+            },
+            shape: CircleBorder(),
+            elevation: 10,
+            child: Icon(Icons.add, size: 60),
+          ),
+        ),
+      ),
     );
   }
 
@@ -100,6 +130,8 @@ class _HomeScreenState extends State<HomeScreen> {
       _selectedIndex = index;
     });
   }
+
+  void _addDay() {}
 
   /// Shows a dialog with event information including dates, venue, and description
   void _showEventInfo(BuildContext context) {

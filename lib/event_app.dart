@@ -1,5 +1,5 @@
 import 'package:event_flutter_template/l10n/app_localizations.dart';
-import 'package:event_flutter_template/ui/home_screen.dart';
+import 'package:event_flutter_template/ui/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
 /// Main application widget that sets up the Material Design theme and localization

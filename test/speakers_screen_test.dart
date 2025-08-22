@@ -1,10 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-
 import 'package:event_flutter_template/core/core.dart';
-import 'package:event_flutter_template/ui/speakers_screen.dart';
 import 'package:event_flutter_template/l10n/app_localizations.dart';
+import 'package:event_flutter_template/ui/screens/speakers_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('SpeakersScreen Tests', () {

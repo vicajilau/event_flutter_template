@@ -1,6 +1,7 @@
 {
-    "files.associations": {
-        "*.maso": "maso",
-        "*.quiz": "quiz"
-    }
+  "files.associations": {
+    "*.maso": "maso",
+    "*.quiz": "quiz"
+  },
+  "dart.flutterSdkPath": ".fvm/versions/3.35.1"
 }

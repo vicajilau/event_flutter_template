@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import '../core/core.dart';
-import '../l10n/app_localizations.dart';
-import 'widgets/widgets.dart';
+
+import '../../core/core.dart';
+import '../../l10n/app_localizations.dart';
+import '../widgets/widgets.dart';
 
 /// Screen that displays a grid of speakers with their information and social links
 /// Fetches speaker data from the configured data source and displays it in cards

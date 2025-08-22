@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:event_flutter_template/core/core.dart';
-import 'package:event_flutter_template/ui/agenda_screen.dart';
+import 'package:event_flutter_template/ui/screens/agenda_screen.dart';
 import 'package:event_flutter_template/l10n/app_localizations.dart';
 
 void main() {

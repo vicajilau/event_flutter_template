@@ -53,16 +53,16 @@ class SiteConfig {
     required String year,
   }) {
     return SiteConfig(
-      eventName: json['eventName'],
-      year: year,
-      baseUrl: baseUrl,
-      primaryColor: json['primaryColor'],
-      secondaryColor: json['secondaryColor'],
-      eventDates: json['eventDates'] != null
-          ? EventDates.fromJson(json['eventDates'])
-          : null,
-      venue: json['venue'] != null ? Venue.fromJson(json['venue']) : null,
-      description: json['description'],
-    );
+        eventName: json['eventName'],
+        year: year,
+        baseUrl: baseUrl,
+        primaryColor: json['primaryColor'],
+        secondaryColor: json['secondaryColor'],
+        eventDates: json['eventDates'] != null
+            ? EventDates.fromJson(json['eventDates'])
+            : null,
+        venue: json['venue'] != null ? Venue.fromJson(json['venue']) : null,
+        description: json['description'],
+      );
   }
 }

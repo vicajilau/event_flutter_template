@@ -8,7 +8,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   final config = await ConfigLoader.loadConfig();
-  final dataLoader = DataLoader(config);
+  final organization = await ConfigLoader.loadOrganization();
+  final dataLoader = DataLoader(config,organization);
 
-  runApp(EventApp(config: config, dataLoader: dataLoader));
+  runApp(EventApp(config: config, dataLoader: dataLoader,organization: organization));
 }

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:event_flutter_template/core/models/organization.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:http/http.dart' as http;
 import '../models/models.dart';
@@ -7,10 +8,12 @@ import '../models/models.dart';
 /// Supports both local asset loading and remote HTTP loading based on configuration
 class DataLoader {
   /// Site configuration containing base URL and other settings
-  final SiteConfig config;
+  final List<SiteConfig> config;
+
+  final Organization organization;
 
   /// Creates a new DataLoader with the specified configuration
-  DataLoader(this.config);
+  DataLoader(this.config,this.organization);
 
   /// Generic method to load data from a specified path
   /// Automatically determines whether to load from local assets or remote URL
@@ -21,9 +24,9 @@ class DataLoader {
   /// Throws an Exception if the data cannot be loaded
   Future<List<dynamic>> _loadData(String path) async {
     String content;
-    if (config.baseUrl.startsWith('http')) {
+    if (organization.baseUrlOrganization.startsWith('http')) {
       // Remote loading
-      final url = '${config.baseUrl}/$path';
+      final url = '${organization.baseUrlOrganization}/$path';
       final res = await http.get(Uri.parse(url));
       if (res.statusCode != 200) {
         throw Exception("Error loading data from $url");
@@ -31,7 +34,7 @@ class DataLoader {
       content = res.body;
     } else {
       // Local loading
-      final localPath = '${config.baseUrl}/$path';
+      final localPath = '${organization.baseUrlOrganization}/$path';
       content = await rootBundle.loadString(localPath);
     }
     return json.decode(content);
@@ -49,9 +52,9 @@ class DataLoader {
   /// Returns a Future containing a list of AgendaDay models
   Future<List<AgendaDay>> loadAgenda() async {
     String content;
-    if (config.baseUrl.startsWith('http')) {
+    if (organization.baseUrlOrganization.startsWith('http')) {
       // Remote loading
-      final url = '${config.baseUrl}/config/agenda.json';
+      final url = '${organization.baseUrlOrganization}/config/agenda.json';
       final res = await http.get(Uri.parse(url));
       if (res.statusCode != 200) {
         throw Exception("Error loading agenda from $url");
@@ -59,7 +62,7 @@ class DataLoader {
       content = res.body;
     } else {
       // Local loading
-      final localPath = '${config.baseUrl}/config/agenda.json';
+      final localPath = '${organization.baseUrlOrganization}/config/agenda.json';
       content = await rootBundle.loadString(localPath);
     }
     final agendaData = json.decode(content);

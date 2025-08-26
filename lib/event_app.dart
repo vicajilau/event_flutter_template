@@ -1,3 +1,5 @@
+import 'package:event_flutter_template/core/core.dart';
+import 'package:event_flutter_template/core/models/organization.dart';
 import 'package:event_flutter_template/l10n/app_localizations.dart';
 import 'package:event_flutter_template/ui/screens/event_collection_screen.dart';
 import 'package:flutter/material.dart';
@@ -9,9 +11,11 @@ class EventApp extends StatefulWidget {
   final dynamic config;
 
   /// Data loader for fetching speakers, agenda, and sponsors
-  final dynamic dataLoader;
+  final DataLoader dataLoader;
 
-  const EventApp({super.key, required this.config, required this.dataLoader});
+  final Organization organization;
+
+  const EventApp({super.key, required this.config, required this.dataLoader, required this.organization});
 
   @override
   State<EventApp> createState() => _EventAppState();
@@ -32,15 +36,16 @@ class _EventAppState extends State<EventApp> {
   Widget build(BuildContext context) {
     final config = widget.config;
     final dataLoader = widget.dataLoader;
+    final organization = widget.organization;
     final primaryColor = Color(
-      int.parse(config.primaryColor.replaceFirst('#', '0xff')),
+      int.parse(organization.primaryColorOrganization.replaceFirst('#', '0xff')),
     );
     final secondaryColor = Color(
-      int.parse(config.secondaryColor.replaceFirst('#', '0xff')),
+      int.parse(organization.secondaryColorOrganization.replaceFirst('#', '0xff')),
     );
 
     return MaterialApp(
-      title: config.eventName,
+      title: organization.organizationName,
       debugShowCheckedModeBanner: false,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
@@ -86,6 +91,7 @@ class _EventAppState extends State<EventApp> {
         dataLoader: dataLoader,
         locale: _locale ?? AppLocalizations.supportedLocales.first,
         localeChanged: _changeLocale,
+        organization: widget.organization,
       ),
     );
   }

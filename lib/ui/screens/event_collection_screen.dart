@@ -81,29 +81,26 @@ class _EventCollectionScreenState extends State<EventCollectionScreen> {
                 return Card(
                   child: ListTile(
                     dense: true,
-                    leading: IconButton(
-                      icon: const Icon(Icons.edit),
-                      onPressed: () {
-                        print("edit: ${item.eventName}");
-                      },
-                    ),
                     title: Text(
                       item.eventName,
                       overflow: TextOverflow.ellipsis,
                     ),
                     subtitle: Text(
-                      "${item.eventDates?.startDate.toString()}/${item.eventDates!.endDate}",
+                      "${item.eventDates.startDate.toString()}/${item.eventDates.endDate}",
                       overflow: TextOverflow.ellipsis,
                     ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => AgendaScreen(events: [item.eventDates])),
+                      );
+                    },
                     trailing: IconButton(
                       icon: const Icon(Icons.delete),
                       onPressed: () {
                         print("delete: ${item.eventName}");
                       },
                     ),
-                    onTap: () {
-                      print("Navega al EventScreen: ${item.eventName}");
-                    },
                   ),
                 );
               }).toList(),

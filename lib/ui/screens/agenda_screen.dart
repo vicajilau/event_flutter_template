@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
+import '../../core/models/event.dart';
+
 /// Screen that displays the event agenda with sessions organized by days and tracks
 /// Supports multiple days and tracks with color-coded sessions
 class AgendaScreen extends StatelessWidget {
-  List<String> events;
+  final List<EventDates> events;
 
-  AgendaScreen({super.key, required this.events});
+  const AgendaScreen({super.key, required this.events});
 
   @override
   Widget build(BuildContext context) {

@@ -10,7 +10,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:event_flutter_template/core/core.dart';
-import 'package:event_flutter_template/ui/screens/home_screen.dart';
+import 'package:event_flutter_template/ui/screens/event_collection_screen.dart';
 import 'package:event_flutter_template/l10n/app_localizations.dart';
 
 void main() {
@@ -64,7 +64,7 @@ void main() {
       final dataLoader = createMockDataLoader();
 
       await tester.pumpWidget(
-        createTestApp(HomeScreen(config: config, dataLoader: dataLoader, locale: const Locale('en'), localeChanged: (_) {})),
+        createTestApp(EventCollectionScreen(config: config, dataLoader: dataLoader, locale: const Locale('en'), localeChanged: (_) {})),
       );
 
       // Wait for any async operations
@@ -89,7 +89,7 @@ void main() {
       final dataLoader = createMockDataLoader();
 
       await tester.pumpWidget(
-        createTestApp(HomeScreen(config: config, dataLoader: dataLoader, locale: const Locale('en'), localeChanged: (_) {})),
+        createTestApp(EventCollectionScreen(config: config, dataLoader: dataLoader, locale: const Locale('en'), localeChanged: (_) {})),
       );
 
       await tester.pumpAndSettle();
@@ -119,7 +119,7 @@ void main() {
       final dataLoader = createMockDataLoader();
 
       await tester.pumpWidget(
-        createTestApp(HomeScreen(config: config, dataLoader: dataLoader, locale: const Locale('en'), localeChanged: (_) {})),
+        createTestApp(EventCollectionScreen(config: config, dataLoader: dataLoader, locale: const Locale('en'), localeChanged: (_) {})),
       );
 
       await tester.pumpAndSettle();
@@ -162,7 +162,7 @@ void main() {
             GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: const [Locale('en'), Locale('es')],
-          home: HomeScreen(config: config, dataLoader: dataLoader, locale: const Locale('en'), localeChanged: (_) {}),
+          home: EventCollectionScreen(config: config, dataLoader: dataLoader, locale: const Locale('en'), localeChanged: (_) {}),
         ),
       );
 
@@ -190,7 +190,7 @@ void main() {
             GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: const [Locale('en'), Locale('es')],
-          home: HomeScreen(config: config, dataLoader: dataLoader, locale: const Locale('es'), localeChanged: (_) {}),
+          home: EventCollectionScreen(config: config, dataLoader: dataLoader, locale: const Locale('es'), localeChanged: (_) {}),
         ),
       );
 

@@ -1,5 +1,5 @@
 import 'package:event_flutter_template/l10n/app_localizations.dart';
-import 'package:event_flutter_template/ui/screens/home_screen.dart';
+import 'package:event_flutter_template/ui/screens/event_collection_screen.dart';
 import 'package:flutter/material.dart';
 
 /// Main application widget that sets up the Material Design theme and localization
@@ -81,7 +81,7 @@ class _EventAppState extends State<EventApp> {
           ),
         ),
       ),
-      home: HomeScreen(
+      home: EventCollectionScreen(
         config: config,
         dataLoader: dataLoader,
         locale: _locale ?? AppLocalizations.supportedLocales.first,

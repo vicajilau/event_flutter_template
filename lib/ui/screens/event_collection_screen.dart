@@ -1,14 +1,14 @@
-import 'package:event_flutter_template/ui/screens/screens.dart';
 import 'package:event_flutter_template/ui/widgets/language_selector.dart';
 import 'package:event_flutter_template/ui/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/core.dart';
 import '../../l10n/app_localizations.dart';
+import 'screens.dart';
 
 /// Main home screen widget that displays the event information and navigation
 /// Features a bottom navigation bar with tabs for Agenda, Speakers, and Sponsors
-class HomeScreen extends StatefulWidget {
+class EventCollectionScreen extends StatefulWidget {
   /// Site configuration containing event details
   final SiteConfig config;
 
@@ -21,7 +21,7 @@ class HomeScreen extends StatefulWidget {
   /// Callback function to be called when the locale changes
   final ValueChanged<Locale> localeChanged;
 
-  const HomeScreen({
+  const EventCollectionScreen({
     super.key,
     required this.config,
     required this.dataLoader,
@@ -30,26 +30,15 @@ class HomeScreen extends StatefulWidget {
   });
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<EventCollectionScreen> createState() => _EventCollectionScreenState();
 }
 
 /// State class for HomeScreen that manages navigation between tabs
-class _HomeScreenState extends State<HomeScreen> {
-  /// Currently selected tab index
-  int _selectedIndex = 0;
-
-  /// List of screens to display in the IndexedStack
-  late final List<Widget> _screens;
-
+class _EventCollectionScreenState extends State<EventCollectionScreen> {
   /// Initializes the screens list with data loader
   @override
   void initState() {
     super.initState();
-    _screens = [
-      AgendaScreen(dataLoader: widget.dataLoader),
-      SpeakersScreen(dataLoader: widget.dataLoader),
-      SponsorsScreen(dataLoader: widget.dataLoader),
-    ];
   }
 
   @override
@@ -68,67 +57,18 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      body: IndexedStack(index: _selectedIndex, children: _screens),
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: _selectedIndex,
-        onDestinationSelected: _onItemTapped,
-        destinations: [
-          NavigationDestination(
-            icon: const Icon(Icons.schedule),
-            selectedIcon: const Icon(Icons.schedule),
-            label: AppLocalizations.of(context)!.agenda,
-          ),
-          NavigationDestination(
-            icon: const Icon(Icons.people_outline),
-            selectedIcon: const Icon(Icons.people),
-            label: AppLocalizations.of(context)!.speakers,
-          ),
-          NavigationDestination(
-            icon: const Icon(Icons.business_outlined),
-            selectedIcon: const Icon(Icons.business),
-            label: AppLocalizations.of(context)!.sponsors,
+      body: ListView(
+        padding: EdgeInsets.all(16),
+        children: [
+          AgendaCard(
+            config: widget.config,
+            dataLoader: widget.dataLoader,
+            locale: widget.locale,
+            localeChanged: widget.localeChanged,
           ),
         ],
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8),
-        child: SizedBox(
-          height: 85,
-          width: 85,
-          child: FloatingActionButton(
-            onPressed: () {
-              if (_selectedIndex == 0) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => AgendaFormScreen()),
-                );
-              } else if (_selectedIndex == 1) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => SpeakersFormScreen()),
-                );
-              } else if (_selectedIndex == 2) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => SponsorsFormScreen()),
-                );
-              }
-            },
-            shape: CircleBorder(),
-            elevation: 10,
-            child: Icon(Icons.add, size: 60),
-          ),
-        ),
-      ),
     );
-  }
-
-  /// Handles tab selection changes
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
   }
 
   void _addDay() {}
@@ -253,5 +193,57 @@ class _HomeScreenState extends State<HomeScreen> {
 
     // Use the extension to open URL from context
     await context.openUrl(googleMapsUrl);
+  }
+}
+
+class AgendaCard extends StatelessWidget {
+  /// Site configuration containing event details
+  final SiteConfig config;
+
+  /// Data loader for fetching content from various sources
+  final DataLoader dataLoader;
+
+  /// Currently selected locale for the application
+  final Locale locale;
+
+  /// Callback function to be called when the locale changes
+  final ValueChanged<Locale> localeChanged;
+
+  const AgendaCard({
+    super.key,
+    required this.config,
+    required this.dataLoader,
+    required this.locale,
+    required this.localeChanged,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Card(
+        child: ListTile(
+          leading: IconButton(
+            icon: Icon(Icons.edit),
+            onPressed: () {
+              print('edit');
+            },
+          ),
+          title: Text('DevFest Spain 2025'),
+          subtitle: Text('12/10/25 - 15/10/25'),
+          trailing: IconButton(
+            icon: Icon(Icons.delete),
+            onPressed: () {
+              print("delete");
+            },
+          ),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => AgendaScreen(events: [])),
+            );
+          },
+        ),
+      ),
+    );
   }
 }

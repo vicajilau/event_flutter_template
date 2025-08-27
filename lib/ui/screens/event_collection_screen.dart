@@ -1,10 +1,10 @@
+import 'package:event_flutter_template/ui/screens/event_container_screen.dart';
 import 'package:event_flutter_template/ui/widgets/language_selector.dart';
 import 'package:event_flutter_template/ui/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/core.dart';
 import '../../l10n/app_localizations.dart';
-import 'screens.dart';
 
 /// Main home screen widget that displays the event information and navigation
 /// Features a bottom navigation bar with tabs for Agenda, Speakers, and Sponsors
@@ -239,7 +239,14 @@ class AgendaCard extends StatelessWidget {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => AgendaScreen(events: [])),
+              MaterialPageRoute(
+                builder: (context) => EventContainerScreen(
+                  config: config,
+                  dataLoader: dataLoader,
+                  locale: locale,
+                  localeChanged: localeChanged,
+                ),
+              ),
             );
           },
         ),

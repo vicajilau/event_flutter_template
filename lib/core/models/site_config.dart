@@ -20,7 +20,7 @@ class SiteConfig {
   final String secondaryColor;
 
   /// Event date information including start, end dates and timezone
-  final EventDates eventDates;
+  final EventDates? eventDates;
 
   /// Venue information where the event will take place
   final Venue? venue;
@@ -35,7 +35,7 @@ class SiteConfig {
     required this.baseUrl,
     required this.primaryColor,
     required this.secondaryColor,
-    required this.eventDates,
+    this.eventDates,
     this.venue,
     this.description,
   });
@@ -72,7 +72,7 @@ class SiteConfig {
       'baseUrl': siteConfig.baseUrl,
       'primaryColor': siteConfig.primaryColor,
       'secondaryColor': siteConfig.secondaryColor,
-      'eventDates': siteConfig.eventDates.toJson(),
+      'eventDates': siteConfig.eventDates?.toJson(),
       'venue': siteConfig.venue?.toJson(),
       'description': siteConfig.description,
     };

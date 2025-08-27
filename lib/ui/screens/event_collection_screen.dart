@@ -43,7 +43,6 @@ class EventCollectionScreen extends StatefulWidget {
 
 /// State class for HomeScreen that manages navigation between tabs
 class _EventCollectionScreenState extends State<EventCollectionScreen> {
-
   var items;
 
   /// Initializes the screens list with data loader
@@ -73,71 +72,91 @@ class _EventCollectionScreenState extends State<EventCollectionScreen> {
       body: GridView.builder(
         itemCount: items.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: widget.crossAxisCount, // Número de ítems por fila
-          crossAxisSpacing: 8.0, // Espacio horizontal entre ítems
-          mainAxisSpacing: 8.0, // Espacio vertical entre ítems
+          crossAxisCount: widget.crossAxisCount,
+          childAspectRatio: 1.2,
         ),
         itemBuilder: (BuildContext context, int index) {
           var item = items[index];
-          return ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 800, minHeight: 400),
-            child: Wrap(
-              spacing: 8,
-              runSpacing: 8,
-              children: [
-                Card(
-                  child: ListTile(
-                    dense: true,
-                    title: Text(
-                      item.eventName,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    subtitle: Text(
-                      "${item.eventDates.startDate.toString()}/${item.eventDates.endDate}",
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => AgendaScreen(events: [item.eventDates])),
-                      );
-                    },
-                    trailing: IconButton(
-                      icon: const Icon(Icons.delete),
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              title: const Text("Delete Event"),
-                              content: const Text("Are you sure you want to delete this event?"),
-                              actions: <Widget>[
-                                TextButton(
-                                  child: const Text("Cancel"),
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AgendaScreen(events: [item.eventDates])),
+              );
+            },
+            child: Card(
+              color: Colors.blue.withOpacity(0.3),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.delete),
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: const Text("Delete Event"),
+                                content: const Text(
+                                  "Are you sure you want to delete this event?",
                                 ),
-                                TextButton(
-                                  child: const Text("Delete"),
-                                  onPressed: () async {
-                                    Navigator.of(context).pop();
-                                    setState(() {
-                                      items.remove(item);
-                                      dataLoader.config.remove(item);
-                                    });
-                                    await _saveConfigToJson(dataLoader.config);
-                                  },
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      },
+                                actions: <Widget>[
+                                  TextButton(
+                                    child: const Text("Cancel"),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                  TextButton(
+                                    child: const Text("Delete"),
+                                    onPressed: () async {
+                                      Navigator.of(context).pop();
+                                      setState(() {
+                                        items.remove(item);
+                                        dataLoader.config.remove(item);
+                                      });
+                                      await _saveConfigToJson(
+                                        dataLoader.config,
+                                      );
+                                    },
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            item.eventName,
+                            style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+                            overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.center,
+                            maxLines: 2,
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            "${item.eventDates.startDate.toString()}/${item.eventDates.endDate}",
+                            style: Theme.of(context).textTheme.bodySmall,
+                            overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                )
-              ]
+                ],
+                              ),
             ),
           );
         },
@@ -149,7 +168,9 @@ class _EventCollectionScreenState extends State<EventCollectionScreen> {
     try {
       final directory = Directory.current.path;
       final file = File('$directory/events/2025/config/site.json');
-      final jsonString = jsonEncode(config.map((siteConfig) => siteConfig.toJson(siteConfig)).toList());
+      final jsonString = jsonEncode(
+        config.map((siteConfig) => siteConfig.toJson(siteConfig)).toList(),
+      );
       await file.writeAsString(jsonString);
       if (kDebugMode) {
         print('Configuración guardada en ${file.path}');

@@ -6,9 +6,9 @@ import '../../l10n/app_localizations.dart';
 /// Screen that displays the event agenda with sessions organized by days and tracks
 /// Supports multiple days and tracks with color-coded sessions
 class AgendaScreen extends StatefulWidget {
-  final List<String> events;
+  List<String> events;
 
-  const AgendaScreen({super.key, required this.events});
+  AgendaScreen({super.key, required this.events});
 
   @override
   State<AgendaScreen> createState() => _AgendaScreenState();

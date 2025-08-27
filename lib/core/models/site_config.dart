@@ -52,13 +52,18 @@ class SiteConfig {
     required String baseUrl,
     required String year,
   }) {
+    var eventDates;
+    if(json['eventDates'] != null) {
+      eventDates = EventDates.fromJson(json['eventDates']);
+
+    }
     return SiteConfig(
         eventName: json['eventName'],
         year: year,
         baseUrl: baseUrl,
         primaryColor: json['primaryColor'],
         secondaryColor: json['secondaryColor'],
-        eventDates: EventDates.fromJson(json['eventDates']),
+        eventDates:eventDates ,
         venue: json['venue'] != null ? Venue.fromJson(json['venue']) : null,
         description: json['description'],
       );

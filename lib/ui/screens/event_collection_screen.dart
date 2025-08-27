@@ -72,13 +72,14 @@ class _EventCollectionScreenState extends State<EventCollectionScreen> {
           mainAxisSpacing: 8.0, // Espacio vertical entre ítems
         ),
         itemBuilder: (BuildContext context, int index) {
+          var item = items[index];
           return ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 800, minHeight: 400),
             child: Wrap(
               spacing: 8,
               runSpacing: 8,
-              children: items.map((item) {
-                return Card(
+              children: [
+                Card(
                   child: ListTile(
                     dense: true,
                     title: Text(
@@ -98,12 +99,37 @@ class _EventCollectionScreenState extends State<EventCollectionScreen> {
                     trailing: IconButton(
                       icon: const Icon(Icons.delete),
                       onPressed: () {
-                        print("delete: ${item.eventName}");
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: const Text("Delete Event"),
+                              content: const Text("Are you sure you want to delete this event?"),
+                              actions: <Widget>[
+                                TextButton(
+                                  child: const Text("Cancel"),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                                TextButton(
+                                  child: const Text("Delete"),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                    setState(() {
+                                      items.remove(item);
+                                    });
+                                  },
+                                ),
+                              ],
+                            );
+                          },
+                        );
                       },
                     ),
                   ),
-                );
-              }).toList(),
+                )
+              ]
             ),
           );
         },

@@ -63,4 +63,20 @@ class SiteConfig {
         description: json['description'],
       );
   }
+
+  /// Converts the SiteConfig instance to a JSON object
+  Map<String, dynamic> toJson(SiteConfig siteConfig) {
+    return {
+      'eventName': siteConfig.eventName,
+      'year': siteConfig.year,
+      'baseUrl': siteConfig.baseUrl,
+      'primaryColor': siteConfig.primaryColor,
+      'secondaryColor': siteConfig.secondaryColor,
+      'eventDates': siteConfig.eventDates.toJson(),
+      'venue': siteConfig.venue?.toJson(),
+      'description': siteConfig.description,
+    };
+  }
+
+
 }

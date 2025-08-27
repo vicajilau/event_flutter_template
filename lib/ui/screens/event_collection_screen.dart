@@ -1,5 +1,8 @@
+import 'dart:convert';
+import 'dart:io';
 import 'package:event_flutter_template/core/models/organization.dart';
 import 'package:event_flutter_template/ui/widgets/language_selector.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/core.dart';
@@ -40,6 +43,9 @@ class EventCollectionScreen extends StatefulWidget {
 
 /// State class for HomeScreen that manages navigation between tabs
 class _EventCollectionScreenState extends State<EventCollectionScreen> {
+
+  var items;
+
   /// Initializes the screens list with data loader
   @override
   void initState() {
@@ -52,7 +58,7 @@ class _EventCollectionScreenState extends State<EventCollectionScreen> {
     if (dataLoader.config.isEmpty) {
       return const Center(child: Text("No hay organizaciones para mostrar."));
     }
-    final items = dataLoader.config.toList();
+    items = dataLoader.config.toList();
 
     return Scaffold(
       appBar: AppBar(
@@ -114,11 +120,13 @@ class _EventCollectionScreenState extends State<EventCollectionScreen> {
                                 ),
                                 TextButton(
                                   child: const Text("Delete"),
-                                  onPressed: () {
+                                  onPressed: () async {
                                     Navigator.of(context).pop();
                                     setState(() {
                                       items.remove(item);
+                                      dataLoader.config.remove(item);
                                     });
+                                    await _saveConfigToJson(dataLoader.config);
                                   },
                                 ),
                               ],
@@ -135,6 +143,22 @@ class _EventCollectionScreenState extends State<EventCollectionScreen> {
         },
       ),
     );
+  }
+
+  Future<void> _saveConfigToJson(List<SiteConfig> config) async {
+    try {
+      final directory = Directory.current.path;
+      final file = File('$directory/events/2025/config/site.json');
+      final jsonString = jsonEncode(config.map((siteConfig) => siteConfig.toJson(siteConfig)).toList());
+      await file.writeAsString(jsonString);
+      if (kDebugMode) {
+        print('Configuración guardada en ${file.path}');
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print('Error al guardar la configuración: $e');
+      }
+    }
   }
 
   /*void _addDay() {}

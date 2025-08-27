@@ -7,7 +7,7 @@ import '../../l10n/app_localizations.dart';
 
 class EventContainerScreen extends StatefulWidget {
   /// Site configuration containing event details
-  final SiteConfig config;
+  final List<SiteConfig> config;
 
   /// Data loader for fetching content from various sources
   final DataLoader dataLoader;

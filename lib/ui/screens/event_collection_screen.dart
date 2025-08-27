@@ -70,6 +70,7 @@ class _EventCollectionScreenState extends State<EventCollectionScreen> {
         ],
       ),
       body: GridView.builder(
+        padding: const EdgeInsets.fromLTRB(8.0, 20.0, 8.0, 20.0),
         itemCount: items.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: widget.crossAxisCount,

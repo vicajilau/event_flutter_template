@@ -81,11 +81,13 @@ class _EventCollectionScreenState extends State<EventCollectionScreen> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => AgendaScreen(events: [item.eventDates])),
+                MaterialPageRoute(
+                  builder: (context) => AgendaScreen(events: [item.eventDates]),
+                ),
               );
             },
             child: Card(
-              color: Colors.blue.withOpacity(0.3),
+              color: Colors.blue.withAlpha(77),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -139,7 +141,8 @@ class _EventCollectionScreenState extends State<EventCollectionScreen> {
                         children: [
                           Text(
                             item.eventName,
-                            style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+                            style: Theme.of(context).textTheme.titleMedium
+                                ?.copyWith(fontWeight: FontWeight.bold),
                             overflow: TextOverflow.ellipsis,
                             textAlign: TextAlign.center,
                             maxLines: 2,
@@ -156,7 +159,7 @@ class _EventCollectionScreenState extends State<EventCollectionScreen> {
                     ),
                   ),
                 ],
-                              ),
+              ),
             ),
           );
         },

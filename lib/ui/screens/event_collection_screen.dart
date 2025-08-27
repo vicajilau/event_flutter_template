@@ -73,7 +73,7 @@ class _EventCollectionScreenState extends State<EventCollectionScreen> {
         itemCount: items.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: widget.crossAxisCount,
-          childAspectRatio: 1.2,
+          childAspectRatio: 1.5,
         ),
         itemBuilder: (BuildContext context, int index) {
           var item = items[index];
@@ -87,7 +87,7 @@ class _EventCollectionScreenState extends State<EventCollectionScreen> {
               );
             },
             child: Card(
-              color: Colors.blue.withAlpha(77),
+              color: Colors.blue.withAlpha(67),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

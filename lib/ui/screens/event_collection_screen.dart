@@ -6,7 +6,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/core.dart';
-import 'screens.dart'
+import 'event_container_screen.dart';
+import 'screens.dart';
 
 /// Main home screen widget that displays the event information and navigation
 /// Features a bottom navigation bar with tabs for Agenda, Speakers, and Sponsors

@@ -1,8 +1,7 @@
+import 'package:event_flutter_template/core/core.dart';
 import 'package:event_flutter_template/ui/screens/screens.dart';
 import 'package:flutter/material.dart';
 
-import '../../core/models/site_config.dart';
-import '../../core/services/data_loader.dart';
 import '../../l10n/app_localizations.dart';
 
 class EventContainerScreen extends StatefulWidget {
@@ -18,12 +17,15 @@ class EventContainerScreen extends StatefulWidget {
   /// Callback function to be called when the locale changes
   final ValueChanged<Locale> localeChanged;
 
+  final List<AgendaDay> agendaDays;
+
   const EventContainerScreen({
     super.key,
     required this.config,
     required this.dataLoader,
     required this.locale,
     required this.localeChanged,
+    required this.agendaDays,
   });
 
   @override
@@ -41,8 +43,7 @@ class _EventContainerScreenState extends State<EventContainerScreen> {
   void initState() {
     super.initState();
     _screens = [
-      // TODO: pasarle el objeto correcto
-      AgendaScreen(events: ['Hola', 'que', 'tal']),
+      AgendaScreen(agendaDays: widget.agendaDays),
       SpeakersScreen(dataLoader: widget.dataLoader),
       SponsorsScreen(dataLoader: widget.dataLoader),
     ];

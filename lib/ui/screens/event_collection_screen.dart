@@ -236,7 +236,8 @@ class AgendaCard extends StatelessWidget {
               print("delete");
             },
           ),
-          onTap: () {
+          onTap: () async {
+            final agendaDays = await _getAgendaDays();
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -245,6 +246,7 @@ class AgendaCard extends StatelessWidget {
                   dataLoader: dataLoader,
                   locale: locale,
                   localeChanged: localeChanged,
+                  agendaDays: agendaDays,
                 ),
               ),
             );
@@ -252,5 +254,9 @@ class AgendaCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<List<AgendaDay>> _getAgendaDays() async {
+    return await dataLoader.loadAgenda();
   }
 }

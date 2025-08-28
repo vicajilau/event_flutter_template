@@ -41,7 +41,8 @@ class _EventContainerScreenState extends State<EventContainerScreen> {
   void initState() {
     super.initState();
     _screens = [
-      AgendaScreen(events: []),
+      // TODO: pasarle el objeto correcto
+      AgendaScreen(events: ['Hola', 'que', 'tal']),
       SpeakersScreen(dataLoader: widget.dataLoader),
       SponsorsScreen(dataLoader: widget.dataLoader),
     ];
@@ -75,6 +76,19 @@ class _EventContainerScreenState extends State<EventContainerScreen> {
             label: AppLocalizations.of(context)!.sponsors,
           ),
         ],
+      ),
+      floatingActionButton: SizedBox(
+        width: 60,
+        height: 60,
+        child: FloatingActionButton(
+          onPressed: () {
+            // TODO: hacer acciones del botón en función de la vista mostrada actual
+          },
+          elevation: 16,
+          backgroundColor: Theme.of(context).colorScheme.primary,
+          shape: CircleBorder(),
+          child: Icon(Icons.add, color: Colors.white),
+        ),
       ),
     );
   }

@@ -6,26 +6,37 @@ import '../../l10n/app_localizations.dart';
 /// Screen that displays the event agenda with sessions organized by days and tracks
 /// Supports multiple days and tracks with color-coded sessions
 class AgendaScreen extends StatefulWidget {
-  List<String> events;
+  final List<String> events;
 
-  AgendaScreen({super.key, required this.events});
+  const AgendaScreen({super.key, required this.events});
 
   @override
   State<AgendaScreen> createState() => _AgendaScreenState();
 }
 
 class _AgendaScreenState extends State<AgendaScreen> {
-  bool expanded = false;
+  List<bool> expandedStates = [];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    expandedStates = List.generate(widget.events.length, (index) => false);
+  }
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        ExpansionTile(
+    return ListView.builder(
+      shrinkWrap: true,
+      itemCount: widget.events.length,
+      itemBuilder: (context, index) {
+        bool isExpanded = expandedStates[index];
+        return ExpansionTile(
+          initiallyExpanded: expandedStates[index],
           showTrailingIcon: false,
           onExpansionChanged: (value) {
             setState(() {
-              expanded = value;
+              expandedStates[index] = value;
             });
           },
           title: Container(
@@ -52,89 +63,112 @@ class _AgendaScreenState extends State<AgendaScreen> {
                   ),
                 ),
                 AnimatedRotation(
-                  turns: expanded ? 0.5 : 0.0,
+                  turns: isExpanded ? 0.5 : 0.0,
                   duration: Duration(milliseconds: 200),
                   child: Icon(Icons.expand_more),
                 ),
               ],
             ),
           ),
-          children: <Widget>[
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: DefaultTabController(
-                length: 2,
-                child: Column(
-                  children: [
-                    TabBar(
-                      isScrollable: true,
-                      tabs: [
-                        Tab(text: 'Sala 1'),
-                        Tab(text: 'Sala 2'),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 300,
-                      child: TabBarView(
-                        children: [
-                          ListView(
-                            shrinkWrap: true,
-                            children: [
-                              _buildSessionCard(
-                                context,
-                                Session(
-                                  title: "Prueba 1",
-                                  time: "time",
-                                  speaker: "Fran Cedrón",
-                                  description:
-                                      "Tarjeta de pruebas para crear la UI y ver como se va a la vez que la construyo",
-                                  type: 'keynote',
-                                ),
-                              ),
-                              _buildSessionCard(
-                                context,
-                                Session(
-                                  title: "Prueba 1",
-                                  time: "time",
-                                  speaker: "Fran Cedrón",
-                                  description:
-                                      "Tarjeta de pruebas para crear la UI y ver como se va a la vez que la construyo",
-                                  type: 'keynote',
-                                ),
-                              ),
-                              _buildSessionCard(
-                                context,
-                                Session(
-                                  title: "Prueba 1",
-                                  time: "time",
-                                  speaker: "Fran Cedrón",
-                                  description:
-                                      "Tarjeta de pruebas para crear la UI y ver como se va a la vez que la construyo",
-                                  type: 'keynote',
-                                ),
-                              ),
-                            ],
-                          ),
-                          Text('Hola, soy la sala 2'),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+          children: <Widget>[_buildTab()],
+        );
+      },
+    );
+  }
+
+  Widget _buildTab() {
+    int index = 0;
+    return DefaultTabController(
+      initialIndex: index,
+      length: 2,
+      child: Column(
+        children: [
+          TabBar(
+            isScrollable: true,
+            tabs: [
+              Tab(text: 'Sala 1'),
+              Tab(text: 'Sala 2'),
+            ],
+          ),
+          CustomTabBarView(tabsView: ['Sala 1', 'Sala 2']),
+        ],
+      ),
+    );
+  }
+}
+
+class CustomTabBarView extends StatefulWidget {
+  final List<String> tabsView;
+
+  const CustomTabBarView({super.key, required this.tabsView});
+
+  @override
+  State<CustomTabBarView> createState() => _CustomTabBarViewState();
+}
+
+class _CustomTabBarViewState extends State<CustomTabBarView> {
+  List<SessionCards> sessionCards = [];
+  int currentIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    sessionCards = List.generate(widget.tabsView.length, (index) {
+      // TODO: ahora es simulado para verlo bien y probar, pero hay que hacerlo bien con los modelos correspondientes
+      if (index == 0) {
+        return SessionCards(cardsData: ['a', 'a', 'a', 'a']);
+      } else {
+        return SessionCards(cardsData: ['a', 'a']);
+      }
+    });
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final tabBarController = DefaultTabController.of(context);
+    tabBarController.addListener(() {
+      setState(() {
+        currentIndex = tabBarController.index ?? 0;
+      });
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return sessionCards[currentIndex];
+  }
+}
+
+class SessionCards extends StatelessWidget {
+  final List<String> cardsData;
+
+  const SessionCards({super.key, required this.cardsData});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        children: List.generate(cardsData.length, (index) {
+          return _buildSessionCard(
+            context,
+            Session(
+              title: "Prueba 1",
+              time: "time",
+              speaker: "Fran Cedrón",
+              description:
+                  "Tarjeta de pruebas para crear la UI y ver como se va a la vez que la construyo",
+              type: 'keynote',
             ),
-          ],
-        ),
-      ],
+          );
+        }),
+      ),
     );
   }
 
   Widget _buildSessionCard(BuildContext context, Session session) {
     return Card(
-      margin: const EdgeInsets.only(bottom: 12),
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(

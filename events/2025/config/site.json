@@ -1,18 +1,94 @@
 {
-  "eventName": "DevFest Spain 2025",
-  "year": "2025",
-  "baseUrl": "https://vicajilau.github.io/event_flutter_template",
-  "primaryColor": "#4285F4",
-  "secondaryColor": "#34A853",
-  "eventDates": {
-    "startDate": "2025-03-15",
-    "endDate": "2025-03-15",
-    "timezone": "Europe/Madrid"
-  },
-  "venue": {
-    "name": "Palacio de Congresos",
-    "address": "Madrid, España",
-    "city": "Madrid"
-  },
-  "description": "El evento tecnológico más importante de España para desarrolladores"
+  "events": [
+    {
+      "eventName": "DevFest Spain 2025",
+      "year": "2025",
+      "baseUrl": "https://vicajilau.github.io/event_flutter_template",
+      "primaryColor": "#4285F4",
+      "secondaryColor": "#34A853",
+      "eventDates": {
+        "startDate": "2025-03-15",
+        "endDate": "2025-03-15",
+        "timezone": "Europe/Madrid"
+      },
+      "venue": {
+        "name": "Palacio de Congresos",
+        "address": "Madrid, España",
+        "city": "Madrid"
+      },
+      "description": "El evento tecnológico más importante de España para desarrolladores"
+    },
+    {
+      "eventName": "DevFest Spain 2026",
+      "year": "2026",
+      "baseUrl": "https://vicajilau.github.io/event_flutter_template",
+      "primaryColor": "#4285F4",
+      "secondaryColor": "#34A853",
+      "eventDates": {
+        "startDate": "2026-03-14",
+        "endDate": "2026-03-14",
+        "timezone": "Europe/Madrid"
+      },
+      "venue": {
+        "name": "Palacio de Congresos",
+        "address": "Madrid, España",
+        "city": "Madrid"
+      },
+      "description": "El evento tecnológico más importante de España para desarrolladores"
+    },
+    {
+      "eventName": "DevFest Spain 2026",
+      "year": "2026",
+      "baseUrl": "https://vicajilau.github.io/event_flutter_template",
+      "primaryColor": "#4285F4",
+      "secondaryColor": "#34A853",
+      "eventDates": {
+        "startDate": "2026-03-14",
+        "endDate": "2026-03-14",
+        "timezone": "Europe/Madrid"
+      },
+      "venue": {
+        "name": "Palacio de Congresos",
+        "address": "Madrid, España",
+        "city": "Madrid"
+      },
+      "description": "El evento tecnológico más importante de España para desarrolladores"
+    },
+    {
+      "eventName": "DevFest Spain 2026",
+      "year": "2026",
+      "baseUrl": "https://vicajilau.github.io/event_flutter_template",
+      "primaryColor": "#4285F4",
+      "secondaryColor": "#34A853",
+      "eventDates": {
+        "startDate": "2026-03-14",
+        "endDate": "2026-03-14",
+        "timezone": "Europe/Madrid"
+      },
+      "venue": {
+        "name": "Palacio de Congresos",
+        "address": "Madrid, España",
+        "city": "Madrid"
+      },
+      "description": "El evento tecnológico más importante de España para desarrolladores"
+    },
+    {
+      "eventName": "DevFest Spain 2026",
+      "year": "2026",
+      "baseUrl": "https://vicajilau.github.io/event_flutter_template",
+      "primaryColor": "#4285F4",
+      "secondaryColor": "#34A853",
+      "eventDates": {
+        "startDate": "2026-03-14",
+        "endDate": "2026-03-14",
+        "timezone": "Europe/Madrid"
+      },
+      "venue": {
+        "name": "Palacio de Congresos",
+        "address": "Madrid, España",
+        "city": "Madrid"
+      },
+      "description": "El evento tecnológico más importante de España para desarrolladores"
+    }
+  ]
 }

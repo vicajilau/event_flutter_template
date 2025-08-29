@@ -26,6 +26,15 @@ class EventDates {
       timezone: json['timezone'],
     );
   }
+
+  /// Converts this EventDates instance to a JSON object
+  Map<String, dynamic> toJson() {
+    return {
+      'startDate': startDate,
+      'endDate': endDate,
+      'timezone': timezone,
+    };
+  }
 }
 
 /// Represents venue information for an event
@@ -51,5 +60,14 @@ class Venue {
       address: json['address'],
       city: json['city'],
     );
+  }
+
+  /// Converts this Venue instance to a JSON object
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'address': address,
+      'city': city,
+    };
   }
 }

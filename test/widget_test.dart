@@ -5,6 +5,7 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
+import 'package:event_flutter_template/core/models/organization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -30,8 +31,8 @@ void main() {
     }
 
     /// Creates a mock SiteConfig for testing
-    SiteConfig createMockConfig() {
-      return SiteConfig(
+    List<SiteConfig> createMockConfig() {
+      return [SiteConfig(
         eventName: 'Test Event 2025',
         year: '2025',
         baseUrl: 'https://example.com',
@@ -48,13 +49,24 @@ void main() {
           city: 'Test City',
         ),
         description: 'A test event for testing purposes',
+      )];
+    }
+
+    /// Creates a mock Organization for testing
+    Organization createMockOrganization() {
+      return Organization(
+        organizationName: 'Test Organization',
+        primaryColorOrganization: '#777777',
+        secondaryColorOrganization: '#777777',
+        baseUrlOrganization:"http://google.com"
       );
     }
 
     /// Creates a mock DataLoader for testing
     DataLoader createMockDataLoader() {
       final config = createMockConfig();
-      return DataLoader(config);
+      final organization = createMockOrganization();
+      return DataLoader(config,organization);
     }
 
     testWidgets('HomeScreen displays correctly with navigation tabs', (
@@ -62,9 +74,10 @@ void main() {
     ) async {
       final config = createMockConfig();
       final dataLoader = createMockDataLoader();
+      final organization = createMockOrganization();
 
       await tester.pumpWidget(
-        createTestApp(EventCollectionScreen(config: config, dataLoader: dataLoader, locale: const Locale('en'), localeChanged: (_) {})),
+        createTestApp(EventCollectionScreen(config: config, dataLoader: dataLoader, locale: const Locale('en'), localeChanged: (_) {},organization: organization,)),
       );
 
       // Wait for any async operations
@@ -87,9 +100,10 @@ void main() {
     ) async {
       final config = createMockConfig();
       final dataLoader = createMockDataLoader();
+      final organization = createMockOrganization();
 
       await tester.pumpWidget(
-        createTestApp(EventCollectionScreen(config: config, dataLoader: dataLoader, locale: const Locale('en'), localeChanged: (_) {})),
+        createTestApp(EventCollectionScreen(config: config, dataLoader: dataLoader, locale: const Locale('en'), localeChanged: (_) {},organization: organization,)),
       );
 
       await tester.pumpAndSettle();
@@ -117,9 +131,10 @@ void main() {
     ) async {
       final config = createMockConfig();
       final dataLoader = createMockDataLoader();
+      final organization = createMockOrganization();
 
       await tester.pumpWidget(
-        createTestApp(EventCollectionScreen(config: config, dataLoader: dataLoader, locale: const Locale('en'), localeChanged: (_) {})),
+        createTestApp(EventCollectionScreen(config: config, dataLoader: dataLoader, locale: const Locale('en'), localeChanged: (_) {},organization: organization,)),
       );
 
       await tester.pumpAndSettle();
@@ -151,6 +166,7 @@ void main() {
     ) async {
       final config = createMockConfig();
       final dataLoader = createMockDataLoader();
+      final organization = createMockOrganization();
 
       await tester.pumpWidget(
         MaterialApp(
@@ -162,7 +178,7 @@ void main() {
             GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: const [Locale('en'), Locale('es')],
-          home: EventCollectionScreen(config: config, dataLoader: dataLoader, locale: const Locale('en'), localeChanged: (_) {}),
+          home: EventCollectionScreen(config: config, dataLoader: dataLoader, locale: const Locale('en'), localeChanged: (_) {},organization: organization,),
         ),
       );
 
@@ -179,6 +195,7 @@ void main() {
     ) async {
       final config = createMockConfig();
       final dataLoader = createMockDataLoader();
+      final organization = createMockOrganization();
 
       await tester.pumpWidget(
         MaterialApp(
@@ -190,7 +207,7 @@ void main() {
             GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: const [Locale('en'), Locale('es')],
-          home: EventCollectionScreen(config: config, dataLoader: dataLoader, locale: const Locale('es'), localeChanged: (_) {}),
+          home: EventCollectionScreen(config: config, dataLoader: dataLoader, locale: const Locale('es'), localeChanged: (_) {},organization: organization,),
         ),
       );
 

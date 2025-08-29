@@ -52,17 +52,36 @@ class SiteConfig {
     required String baseUrl,
     required String year,
   }) {
+    var eventDates;
+    if(json['eventDates'] != null) {
+      eventDates = EventDates.fromJson(json['eventDates']);
+
+    }
     return SiteConfig(
-      eventName: json['eventName'],
-      year: year,
-      baseUrl: baseUrl,
-      primaryColor: json['primaryColor'],
-      secondaryColor: json['secondaryColor'],
-      eventDates: json['eventDates'] != null
-          ? EventDates.fromJson(json['eventDates'])
-          : null,
-      venue: json['venue'] != null ? Venue.fromJson(json['venue']) : null,
-      description: json['description'],
-    );
+        eventName: json['eventName'],
+        year: year,
+        baseUrl: baseUrl,
+        primaryColor: json['primaryColor'],
+        secondaryColor: json['secondaryColor'],
+        eventDates:eventDates ,
+        venue: json['venue'] != null ? Venue.fromJson(json['venue']) : null,
+        description: json['description'],
+      );
   }
+
+  /// Converts the SiteConfig instance to a JSON object
+  Map<String, dynamic> toJson(SiteConfig siteConfig) {
+    return {
+      'eventName': siteConfig.eventName,
+      'year': siteConfig.year,
+      'baseUrl': siteConfig.baseUrl,
+      'primaryColor': siteConfig.primaryColor,
+      'secondaryColor': siteConfig.secondaryColor,
+      'eventDates': siteConfig.eventDates?.toJson(),
+      'venue': siteConfig.venue?.toJson(),
+      'description': siteConfig.description,
+    };
+  }
+
+
 }

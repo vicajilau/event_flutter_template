@@ -1,4 +1,5 @@
 import 'package:event_flutter_template/core/core.dart';
+import 'package:event_flutter_template/core/models/organization.dart';
 import 'package:event_flutter_template/l10n/app_localizations.dart';
 import 'package:event_flutter_template/ui/screens/speakers_screen.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,17 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+
+  /// Creates a mock Organization for testing
+  Organization createMockOrganization() {
+    return Organization(
+        organizationName: 'Test Organization',
+        primaryColorOrganization: '#777777',
+        secondaryColorOrganization: '#777777',
+        baseUrlOrganization:"http://google.com"
+    );
+  }
+
   group('SpeakersScreen Tests', () {
     /// Creates a test app with proper localization setup
     Widget createTestApp(Widget child) {
@@ -22,20 +34,28 @@ void main() {
     }
 
     /// Creates a mock SiteConfig for testing
-    SiteConfig createMockConfig() {
-      return SiteConfig(
+    List<SiteConfig> createMockConfig() {
+      final json = {
+        'startDate': '2025-09-15',
+        'endDate': '2025-09-16',
+        'timezone': 'Europe/Madrid',
+      };
+
+      final eventDates = EventDates.fromJson(json);
+      return [SiteConfig(
         eventName: 'Test Event 2025',
         year: '2025',
         baseUrl: 'https://example.com',
         primaryColor: '#1976D2',
-        secondaryColor: '#FFC107',
-      );
+        secondaryColor: '#FFC107', eventDates: eventDates,
+      )];
     }
 
     /// Creates a mock DataLoader for testing
     DataLoader createMockDataLoader() {
       final config = createMockConfig();
-      return DataLoader(config);
+      final organization = createMockOrganization();
+      return DataLoader(config,organization);
     }
 
     testWidgets('SpeakersScreen displays loading state initially', (
